@@ -11,8 +11,8 @@ abstract public class User extends Person {
         this.password = "null";
     }
 
-    public User(String name, String id, String role, String email, String DOB, String password){
-        super(name, id, role, email, DOB);
+    public User(String id, String name, String role, String email, String DOB, String password){
+        super(id, name, role, email, DOB);
         this.password = password;
     }
 

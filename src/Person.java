@@ -10,8 +10,8 @@ abstract public class Person {
         this.DOB = "00/00/0000";
     }
     public Person(String id, String name, String role, String email, String DOB){
-        this.name = name;
         this.id = id;
+        this.name = name;
         this.role = role;
         this.email = email;
         this.DOB = DOB;

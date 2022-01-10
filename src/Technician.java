@@ -7,8 +7,8 @@ public class Technician extends User {
         super();
     }
 
-    public Technician(String name, String id,  String email, String DOB, String password) {
-        super(name, id, name, email, DOB, password);
+    public Technician(String id, String name, String role,  String email, String DOB, String password) {
+        super(id, name, role, email, DOB, password);
     }
 
 }

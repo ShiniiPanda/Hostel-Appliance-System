@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Customer extends Person{
 
@@ -26,23 +28,50 @@ public class Customer extends Person{
         this.roomNumber = roomNumber;
     }
 
-    public static Customer fetchById(String id) throws IOException {
-        FileReader fileReader = new FileReader("./TextFiles/Customers.txt");
-        BufferedReader file = new BufferedReader(fileReader);
-        String line;
-        String [] lineArgs;
-        while ((line = file.readLine()) != null){
-            lineArgs = line.strip().split("//");
-            if (lineArgs[0].equals(id)){
-                return new Customer(lineArgs[0],
+    public static Customer fetchById(String id)  {
+        try {
+            FileReader fileReader = new FileReader("./TextFiles/Customers.txt");
+            BufferedReader file = new BufferedReader(fileReader);
+            String line;
+            String [] lineArgs;
+            while ((line = file.readLine()) != null){
+                lineArgs = line.strip().split("//");
+                if (lineArgs[0].equals(id)){
+                    return new Customer(lineArgs[0],
+                            lineArgs[1],
+                            lineArgs[2],
+                            lineArgs[3],
+                            lineArgs[4],
+                            Integer.parseInt(lineArgs[5]));
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return new Customer();
+    }
+
+    public static List<Customer> fetchAllCustomers(){
+        List<Customer> customerList = new ArrayList<Customer>();
+        try {
+            FileReader fileReader = new FileReader("./TextFiles/Customers.txt");
+            BufferedReader file = new BufferedReader(fileReader);
+            String line;
+            String[] lineArgs;
+            Customer customer;
+            while ((line = file.readLine()) != null){
+                lineArgs = line.strip().split("//");
+                customerList.add(new Customer(lineArgs[0],
                         lineArgs[1],
                         lineArgs[2],
                         lineArgs[3],
                         lineArgs[4],
-                        Integer.parseInt(lineArgs[5]));
+                        Integer.parseInt(lineArgs[5])));
             }
+        } catch (IOException e){
+            System.out.println(e.getMessage());
         }
-        return new Customer();
+        return customerList;
     }
 
     @Override

@@ -28,6 +28,7 @@ public class Customer extends Person{
         this.roomNumber = roomNumber;
     }
 
+    // This method returns a Customer object when given an ID.
     public static Customer fetchById(String id)  {
         try {
             FileReader fileReader = new FileReader("./TextFiles/Customers.txt");
@@ -53,6 +54,7 @@ public class Customer extends Person{
         return new Customer();
     }
 
+    // This method returns a list of all the customers that can be found in Customers.txt
     public static List<Customer> fetchAllCustomers(){
         List<Customer> customerList = new ArrayList<Customer>();
         try {

@@ -24,6 +24,7 @@ abstract public class User extends Person {
         this.password = password;
     }
 
+    // This method is used for validating the username and password of user attemtping to login.
     public static int validateLogin(String id, String pass){
         String line;
         String [] lineArgs;

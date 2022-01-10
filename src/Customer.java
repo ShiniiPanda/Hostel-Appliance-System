@@ -45,6 +45,8 @@ public class Customer extends Person{
                             Integer.parseInt(lineArgs[5]));
                 }
             }
+            file.close();
+            fileReader.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -68,6 +70,8 @@ public class Customer extends Person{
                         lineArgs[4],
                         Integer.parseInt(lineArgs[5])));
             }
+            file.close();
+            fileReader.close();
         } catch (IOException e){
             System.out.println(e.getMessage());
         }

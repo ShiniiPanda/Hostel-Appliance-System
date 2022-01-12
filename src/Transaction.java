@@ -1,21 +1,22 @@
 public class Transaction {
 
-    private String senderID, invoiceID, senderName;
+    private Customer sender;
+    private String invoiceID, senderName;
     private float amount;
 
-    public Transaction(String invoiceID, String senderID , String senderName, float amount) {
+    public Transaction(String invoiceID, Customer sender , String senderName, float amount) {
         this.invoiceID = invoiceID;
-        this.senderID = senderID;
+        this.sender = sender;
         this.senderName = senderName;
         this.amount = amount;
     }
 
-    public String getSenderID() {
-        return senderID;
+    public Customer getSender() {
+        return sender;
     }
 
-    public void setSenderID(String senderID) {
-        this.senderID = senderID;
+    public void setSender(Customer sender) {
+        this.sender = sender;
     }
 
     public String getInvoiceID() {

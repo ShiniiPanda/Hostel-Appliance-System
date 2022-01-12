@@ -12,8 +12,9 @@ public class Appointment {
         this.appliance = new HomeAppliance();
     }
 
-    public Appointment(Customer customer, String startDate, String endDate, HomeAppliance appliance) {
+    public Appointment(Customer customer, String status, String startDate, String endDate, HomeAppliance appliance) {
         this.customer = customer;
+        this.status = status;
         this.startDate = startDate;
         this.endDate = endDate;
         this.appliance = appliance;

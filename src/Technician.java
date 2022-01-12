@@ -2,7 +2,6 @@ import javax.print.DocFlavor;
 
 public class Technician extends User {
 
-
     public Technician(){
         super();
     }

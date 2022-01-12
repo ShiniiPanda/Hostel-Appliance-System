@@ -1,7 +1,5 @@
 public class Manager extends User {
 
-    private String password;
-
     public Manager(){
         super();
 

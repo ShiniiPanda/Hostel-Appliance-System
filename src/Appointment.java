@@ -1,11 +1,12 @@
 public class Appointment {
 
     private Customer customer;
-    private String startDate, endDate;
+    private String status, startDate, endDate;
     private HomeAppliance appliance;
 
     public Appointment(){
         this.customer = new Customer();
+        this.status = "unknown";
         this.startDate = "00/00/0000";
         this.endDate = "00/00/0000";
         this.appliance = new HomeAppliance();
@@ -24,6 +25,14 @@ public class Appointment {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getStartDate() {

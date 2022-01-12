@@ -62,7 +62,6 @@ public class Customer extends Person{
             BufferedReader file = new BufferedReader(fileReader);
             String line;
             String[] lineArgs;
-            Customer customer;
             while ((line = file.readLine()) != null){
                 lineArgs = line.strip().split("//");
                 customerList.add(new Customer(lineArgs[0],

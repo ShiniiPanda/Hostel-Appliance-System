@@ -4,6 +4,12 @@ public class Transaction {
     private String invoiceID;
     private float amount;
 
+    public Transaction() {
+        this.invoiceID = "000";
+        this.sender = new Customer();
+        this.amount = 0;
+    }
+
     public Transaction(String invoiceID, Customer sender, float amount) {
         this.invoiceID = invoiceID;
         this.sender = sender;

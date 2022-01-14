@@ -1,10 +1,13 @@
 public class Appointment {
 
     private Customer customer;
-    private String status, startDate, endDate;
+    private String id, status, startDate, endDate;
     private HomeAppliance appliance;
 
+    // Text File Storage Format: ID//CustomerID//Status//StartDate//EndDate//ApplianceID
+
     public Appointment(){
+        this.id = "000";
         this.customer = new Customer();
         this.status = "unknown";
         this.startDate = "00/00/0000";
@@ -12,12 +15,21 @@ public class Appointment {
         this.appliance = new HomeAppliance();
     }
 
-    public Appointment(Customer customer, String status, String startDate, String endDate, HomeAppliance appliance) {
+    public Appointment(String id, Customer customer, String status, String startDate, String endDate, HomeAppliance appliance) {
+        this.id = id;
         this.customer = customer;
         this.status = status;
         this.startDate = startDate;
         this.endDate = endDate;
         this.appliance = appliance;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Customer getCustomer() {

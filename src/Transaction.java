@@ -1,13 +1,12 @@
 public class Transaction {
 
     private Customer sender;
-    private String invoiceID, senderName;
+    private String invoiceID;
     private float amount;
 
-    public Transaction(String invoiceID, Customer sender , String senderName, float amount) {
+    public Transaction(String invoiceID, Customer sender, float amount) {
         this.invoiceID = invoiceID;
         this.sender = sender;
-        this.senderName = senderName;
         this.amount = amount;
     }
 
@@ -25,14 +24,6 @@ public class Transaction {
 
     public void setInvoiceID(String invoiceID) {
         this.invoiceID = invoiceID;
-    }
-
-    public String getSenderName() {
-        return senderName;
-    }
-
-    public void setSenderName(String senderName) {
-        this.senderName = senderName;
     }
 
     public float getAmount() {

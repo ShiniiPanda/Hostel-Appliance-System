@@ -1,3 +1,9 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Appointment {
 
     private Customer customer;
@@ -72,5 +78,53 @@ public class Appointment {
         this.appliance = appliance;
     }
 
+    public static List<Appointment> fetchAppointments(){
+        List<Appointment> appointmentList = new ArrayList<>();
+        String line;
+        String [] lineArgs;
+        try {
+            FileReader fileReader = new FileReader("./TextFiles/Appointments.txt");
+            BufferedReader file = new BufferedReader(fileReader);
+            while ((line = file.readLine()) != null) {
+                lineArgs = line.strip().split("//");
+                appointmentList.add(new Appointment(
+                        lineArgs[0],
+                        Customer.fetchById(lineArgs[1]),
+                        lineArgs[2],
+                        lineArgs[3],
+                        lineArgs[4],
+                        HomeAppliance.fetchByiId(lineArgs[5])
+                ));
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return appointmentList;
+    }
 
+    public static Appointment fetchById(String id)  {
+        try {
+            FileReader fileReader = new FileReader("./TextFiles/Appointments.txt");
+            BufferedReader file = new BufferedReader(fileReader);
+            String line;
+            String [] lineArgs;
+            while ((line = file.readLine()) != null){
+                lineArgs = line.strip().split("//");
+                if (lineArgs[0].equals(id)){
+                    return new Appointment(
+                            lineArgs[0],
+                            Customer.fetchById(lineArgs[1]),
+                            lineArgs[2],
+                            lineArgs[3],
+                            lineArgs[4],
+                            HomeAppliance.fetchByiId(lineArgs[5]));
+                }
+            }
+            file.close();
+            fileReader.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return new Appointment();
+    }
 }

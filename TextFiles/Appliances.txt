@@ -1,0 +1,4 @@
+550//Microwave//10
+551//Oven//12
+552//Electric Kettle//5
+553//Electric Heater//20

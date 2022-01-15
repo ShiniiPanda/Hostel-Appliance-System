@@ -102,6 +102,32 @@ public class Appointment {
         return appointmentList;
     }
 
+    public static List<Appointment> fetchAppointments(String status){
+        List<Appointment> appointmentList = new ArrayList<>();
+        String line;
+        String [] lineArgs;
+        try {
+            FileReader fileReader = new FileReader("./TextFiles/Appointments.txt");
+            BufferedReader file = new BufferedReader(fileReader);
+            while ((line = file.readLine()) != null) {
+                lineArgs = line.strip().split("//");
+                if (lineArgs[2].equals(status.toUpperCase())){
+                    appointmentList.add(new Appointment(
+                            lineArgs[0],
+                            Customer.fetchById(lineArgs[1]),
+                            lineArgs[2],
+                            lineArgs[3],
+                            lineArgs[4],
+                            HomeAppliance.fetchById(lineArgs[5])
+                    ));
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return appointmentList;
+    }
+
     public static Appointment fetchById(String id)  {
         try {
             FileReader fileReader = new FileReader("./TextFiles/Appointments.txt");

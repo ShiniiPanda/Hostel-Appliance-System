@@ -93,7 +93,7 @@ public class Appointment {
                         lineArgs[2],
                         lineArgs[3],
                         lineArgs[4],
-                        HomeAppliance.fetchByiId(lineArgs[5])
+                        HomeAppliance.fetchById(lineArgs[5])
                 ));
             }
         } catch (IOException e) {
@@ -117,7 +117,7 @@ public class Appointment {
                             lineArgs[2],
                             lineArgs[3],
                             lineArgs[4],
-                            HomeAppliance.fetchByiId(lineArgs[5]));
+                            HomeAppliance.fetchById(lineArgs[5]));
                 }
             }
             file.close();

@@ -44,7 +44,7 @@ public class HomeAppliance {
         this.pricePerDay = pricePerDay;
     }
 
-    public static HomeAppliance fetchByiId(String id){
+    public static HomeAppliance fetchById(String id){
         String line;
         String [] lineArgs;
         try {

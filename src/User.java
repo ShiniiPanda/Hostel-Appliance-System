@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-abstract public class User extends Person {
+public class User extends Person {
 
     private String password;
 
@@ -24,8 +24,18 @@ abstract public class User extends Person {
         this.password = password;
     }
 
+    static class LoginResponse{
+        public int result;
+        public User user;
+
+        LoginResponse(int r, User u) {
+            result = r;
+            user = u;
+        }
+    }
+
     // This method is used for validating the username and password of user attemtping to login.
-    public static int validateLogin(String id, String pass){
+    public static LoginResponse validateLogin(String id, String pass){
         String line;
         String [] lineArgs;
         try {
@@ -35,15 +45,21 @@ abstract public class User extends Person {
                 lineArgs = line.strip().split("//");
                 if (lineArgs[0].equals(id)) {
                     if (lineArgs[1].equals(pass)){
-                        return 0; // validated
+                        return new LoginResponse(0, new User(
+                                lineArgs[0],
+                                lineArgs[1],
+                                lineArgs[2],
+                                lineArgs[3],
+                                lineArgs[4],
+                                lineArgs[5])); // validated
                     } else {
-                        return 2; // Password incorrect
+                        return new LoginResponse(2, null); // Password incorrect
                     }
                 }
             }
         } catch (IOException e){
             System.out.println(e.getMessage());
         }
-        return 1; // Username not found
+        return new LoginResponse(1, null); // Username not found
     }
 }

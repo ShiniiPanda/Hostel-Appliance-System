@@ -8,4 +8,8 @@ public class Manager extends User {
         super(id, name, role, email, DOB, password);
     }
 
+    public Manager(User user) {
+        super(user.getId(), user.getName(), user.getRole(), user.getEmail(), user.getDOB(), user.getPassword());
+    }
+
 }

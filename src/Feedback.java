@@ -12,7 +12,6 @@ public class Feedback {
     }
 
     //This is a constructor for the feedback class
-    //Second Comment
     public Feedback(Customer customer, String content, String date, HomeAppliance appliance) {
         this.customer = customer;
         this.content = content;

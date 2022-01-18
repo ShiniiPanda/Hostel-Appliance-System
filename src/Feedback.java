@@ -11,6 +11,7 @@ public class Feedback {
         this.appliance = new HomeAppliance();
     }
 
+    //This is a constructor for the feedback class
     public Feedback(Customer customer, String content, String date, HomeAppliance appliance) {
         this.customer = customer;
         this.content = content;

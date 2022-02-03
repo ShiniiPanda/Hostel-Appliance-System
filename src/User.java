@@ -24,16 +24,6 @@ public class User extends Person {
         this.password = password;
     }
 
-    static class LoginResponse{
-        public int result;
-        public User user;
-
-        LoginResponse(int r, User u) {
-            result = r;
-            user = u;
-        }
-    }
-
     // This method is used for validating the username and password of user attemtping to login.
     public static LoginResponse validateLogin(String id, String pass){
         String line;

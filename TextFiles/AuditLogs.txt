@@ -1,0 +1,3 @@
+[04/02/2022 04:48] Failed Login Attempt | Error: Password not found.
+[04/02/2022 04:48] Failed Login Attempt | Error: Username not found.
+[04/02/2022 04:48] Successful Login Attempt by Admin Account

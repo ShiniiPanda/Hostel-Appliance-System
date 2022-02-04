@@ -102,6 +102,7 @@ public class Appointment {
         return appointmentList;
     }
 
+    //Overloaded type of fetchAppointments to handle Appointment Status
     public static List<Appointment> fetchAppointments(String status){
         List<Appointment> appointmentList = new ArrayList<>();
         String line;

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Login">
+  <grid id="27dc6" binding="mainPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="e7fed" binding="titlePanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="North"/>
+        <properties>
+          <background color="-1"/>
+          <preferredSize width="0" height="80"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="ecffe" class="javax.swing.JLabel">
+            <constraints border-constraint="Center"/>
+            <properties>
+              <background color="-1"/>
+              <font name="Serif" size="36" style="1"/>
+              <foreground color="-16777216"/>
+              <horizontalAlignment value="0"/>
+              <text value="System Login"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="81d00" binding="loginPanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints border-constraint="South"/>
+        <properties>
+          <background color="-1"/>
+          <preferredSize width="0" height="80"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="6c345" class="javax.swing.JButton" binding="loginButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <background color="-1"/>
+              <borderPainted value="true"/>
+              <focusPainted value="false"/>
+              <font name="Arial" size="14" style="1"/>
+              <foreground color="-16777216"/>
+              <preferredSize width="140" height="40"/>
+              <text value="Login"/>
+              <visible value="true"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="f5704" binding="inputPanel" layout-manager="GridBagLayout">
+        <constraints border-constraint="Center"/>
+        <properties>
+          <background color="-1"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="d2d5b" class="javax.swing.JLabel" binding="userLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <gridbag top="0" left="0" bottom="20" right="30" weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <font name="Arial" size="18" style="1"/>
+              <foreground color="-16777216"/>
+              <text value="Username"/>
+            </properties>
+          </component>
+          <component id="8a7e8" class="javax.swing.JLabel" binding="passLabel">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <font name="Arial" size="18" style="1"/>
+              <foreground color="-16777216"/>
+              <text value="Password"/>
+            </properties>
+          </component>
+          <component id="9304a" class="javax.swing.JTextField" binding="nameInput">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+              <gridbag top="0" left="0" bottom="20" right="0" weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <minimumSize width="25" height="14"/>
+              <preferredSize width="150" height="30"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="44fa2" class="javax.swing.JTextField" binding="passInput">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <minimumSize width="25" height="14"/>
+              <preferredSize width="150" height="30"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>

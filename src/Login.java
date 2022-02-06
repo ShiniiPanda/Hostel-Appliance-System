@@ -34,6 +34,7 @@ public class Login {
                 case 0:
                     JOptionPane.showMessageDialog(null, "Successfully Logged In", "Login Success", JOptionPane.PLAIN_MESSAGE);
                     frame.dispose();
+                    relayUser(res.user);
                     break;
                 case 1:
                     JOptionPane.showMessageDialog(null, "Unable to login, invalid ID.", "Login Failed", JOptionPane.ERROR_MESSAGE);
@@ -68,6 +69,15 @@ public class Login {
             fileWriter.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    private static void relayUser(User user) {
+        String role = user.getRole();
+        if (role.equals("Technician")) {
+            new TechnicianMenu(new Technician(user));
+        } else if (role.equals("Manager")) {
+            new ManagerMenu(new Manager(user));
         }
     }
 

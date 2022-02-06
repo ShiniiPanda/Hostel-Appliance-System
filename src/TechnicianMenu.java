@@ -43,6 +43,12 @@ public class TechnicianMenu {
         frame.setMinimumSize(new Dimension(500, 300));
         frame.setVisible(true);
         this.setLoggedUser(user);
+        ImageIcon appointmentsIcon = new ImageIcon("./Icons/Appointments.png"),
+                paymentsIcon = new ImageIcon(("./Icons/Payments.png")),
+                feedbackIcon = new ImageIcon("./Icons/Feedback.png");
+        appointmentsButton.setIcon(appointmentsIcon);
+        paymentsButton.setIcon(paymentsIcon);
+        feedbackButton.setIcon(feedbackIcon);
     }
 
     private void setLoggedUser(Technician user) {
@@ -206,28 +212,40 @@ public class TechnicianMenu {
         menuChoices.setBackground(new Color(-1));
         mainPanel.add(menuChoices, BorderLayout.CENTER);
         appointmentsButton = new JButton();
+        appointmentsButton.setFocusable(false);
+        appointmentsButton.setHorizontalTextPosition(0);
+        appointmentsButton.setPreferredSize(new Dimension(130, 100));
         appointmentsButton.setText("Appointments");
+        appointmentsButton.setVerticalTextPosition(3);
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(0, 0, 0, 25);
+        gbc.insets = new Insets(0, 5, 0, 10);
         menuChoices.add(appointmentsButton, gbc);
         paymentsButton = new JButton();
+        paymentsButton.setFocusable(false);
+        paymentsButton.setHorizontalTextPosition(0);
+        paymentsButton.setPreferredSize(new Dimension(130, 100));
         paymentsButton.setText("Payments");
+        paymentsButton.setVerticalTextPosition(3);
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(0, 25, 0, 25);
+        gbc.insets = new Insets(0, 10, 0, 10);
         menuChoices.add(paymentsButton, gbc);
         feedbackButton = new JButton();
+        feedbackButton.setFocusable(false);
+        feedbackButton.setHorizontalTextPosition(0);
+        feedbackButton.setPreferredSize(new Dimension(130, 100));
         feedbackButton.setText("Feedback");
+        feedbackButton.setVerticalTextPosition(3);
         gbc = new GridBagConstraints();
         gbc.gridx = 2;
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(0, 25, 0, 0);
+        gbc.insets = new Insets(0, 10, 0, 5);
         menuChoices.add(feedbackButton, gbc);
     }
 

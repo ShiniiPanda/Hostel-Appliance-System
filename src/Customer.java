@@ -9,14 +9,17 @@ public class Customer extends Person{
     // Customer Text File Format : ID//NAME//ROLE//EMAIL//DOB//ROOM
 
     private int roomNumber;
+    private String gender;
 
     public Customer() {
         super();
         this.roomNumber = 0;
+        this.gender = "male";
     }
 
-    public Customer(String id, String name, String role, String email, String DOB, int roomNumber){
-        super(id, name, role, email, DOB);
+    public Customer(String id, String name, String state, String email, String DOB, String gender, int roomNumber){
+        super(id, name, state, email, DOB);
+        this.gender = gender;
         this.roomNumber = roomNumber;
     }
 
@@ -26,6 +29,14 @@ public class Customer extends Person{
 
     public void setRoomNumber(int roomNumber) {
         this.roomNumber = roomNumber;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     // This method returns a Customer object when given an ID.
@@ -43,7 +54,8 @@ public class Customer extends Person{
                             lineArgs[2],
                             lineArgs[3],
                             lineArgs[4],
-                            Integer.parseInt(lineArgs[5]));
+                            lineArgs[5],
+                            Integer.parseInt(lineArgs[6]));
                 }
             }
             file.close();
@@ -69,7 +81,8 @@ public class Customer extends Person{
                         lineArgs[2],
                         lineArgs[3],
                         lineArgs[4],
-                        Integer.parseInt(lineArgs[5])));
+                        lineArgs[5],
+                        Integer.parseInt(lineArgs[6])));
             }
             file.close();
             fileReader.close();
@@ -77,6 +90,20 @@ public class Customer extends Person{
             System.out.println(e.getMessage());
         }
         return customerList;
+    }
+
+    public static int fetchCustomerCount(){
+        int count = 0;
+        try {
+            FileReader fileReader = new FileReader("./TextFiles/Customers.txt");
+            BufferedReader file = new BufferedReader(fileReader);
+            while (file.readLine() != null) count++;
+            file.close();
+            fileReader.close();
+        } catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        return count;
     }
 
     @Override
@@ -87,6 +114,7 @@ public class Customer extends Person{
                 ", role='" + role + '\'' +
                 ", email='" + email + '\'' +
                 ", DOB='" + DOB + '\'' +
+                ", Gender='" + gender + '\'' +
                 ", roomNumber=" + roomNumber +
                 '}';
     }

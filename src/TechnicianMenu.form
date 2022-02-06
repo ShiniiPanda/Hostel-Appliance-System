@@ -84,7 +84,7 @@
                       <text value="Name:"/>
                     </properties>
                   </component>
-                  <component id="cf90a" class="javax.swing.JLabel">
+                  <component id="cf90a" class="javax.swing.JLabel" binding="userName">
                     <constraints>
                       <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                       <gridbag top="0" left="5" bottom="10" right="30" weightx="0.0" weighty="0.0"/>
@@ -102,13 +102,13 @@
                       <text value="Email:"/>
                     </properties>
                   </component>
-                  <component id="9b06" class="javax.swing.JLabel">
+                  <component id="9b06" class="javax.swing.JLabel" binding="userEmail">
                     <constraints>
                       <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                       <gridbag top="0" left="5" bottom="10" right="0" weightx="0.0" weighty="0.0"/>
                     </constraints>
                     <properties>
-                      <preferredSize width="100" height="16"/>
+                      <preferredSize width="130" height="16"/>
                       <text value="Label"/>
                     </properties>
                   </component>
@@ -121,7 +121,7 @@
                       <text value="Level:"/>
                     </properties>
                   </component>
-                  <component id="5ce7e" class="javax.swing.JLabel">
+                  <component id="5ce7e" class="javax.swing.JLabel" binding="userLevel">
                     <constraints>
                       <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                       <gridbag top="0" left="5" bottom="0" right="30" weightx="0.0" weighty="0.0"/>
@@ -139,7 +139,7 @@
                       <text value="DOB:"/>
                     </properties>
                   </component>
-                  <component id="56057" class="javax.swing.JLabel">
+                  <component id="56057" class="javax.swing.JLabel" binding="userDOB">
                     <constraints>
                       <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                       <gridbag top="0" left="5" bottom="0" right="0" weightx="0.0" weighty="0.0"/>

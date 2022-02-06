@@ -18,7 +18,12 @@ public class TechnicianMenu {
     private JButton appointmentsButton;
     private JButton paymentsButton;
     private JButton feedbackButton;
+    private JLabel userName;
+    private JLabel userLevel;
+    private JLabel userEmail;
+    private JLabel userDOB;
 
+    // Default menu with no user set (not currently used)
     public TechnicianMenu() {
         JFrame frame = new JFrame();
         $$$setupUI$$$();
@@ -26,6 +31,25 @@ public class TechnicianMenu {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 500);
         frame.setVisible(true);
+    }
+
+    // Menu accessed through system login, will call setLoggedUser()
+    public TechnicianMenu(Technician user) {
+        JFrame frame = new JFrame();
+        $$$setupUI$$$();
+        frame.setContentPane(panel1);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(500, 500);
+        frame.setMinimumSize(new Dimension(500, 300));
+        frame.setVisible(true);
+        this.setLoggedUser(user);
+    }
+
+    private void setLoggedUser(Technician user) {
+        userName.setText(user.getName());
+        userLevel.setText(user.getRole());
+        userEmail.setText(user.getEmail());
+        userDOB.setText(user.getDOB());
     }
 
 //    profilePic = new JLabel();
@@ -110,73 +134,73 @@ public class TechnicianMenu {
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(0, 0, 10, 0);
         userPanel.add(label2, gbc);
-        final JLabel label3 = new JLabel();
-        label3.setText("Employee");
+        userName = new JLabel();
+        userName.setText("Employee");
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(0, 5, 10, 30);
-        userPanel.add(label3, gbc);
-        final JLabel label4 = new JLabel();
-        label4.setText("Email:");
+        userPanel.add(userName, gbc);
+        final JLabel label3 = new JLabel();
+        label3.setText("Email:");
         gbc = new GridBagConstraints();
         gbc.gridx = 2;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(0, 30, 10, 0);
-        userPanel.add(label4, gbc);
-        final JLabel label5 = new JLabel();
-        label5.setPreferredSize(new Dimension(100, 16));
-        label5.setText("Label");
+        userPanel.add(label3, gbc);
+        userEmail = new JLabel();
+        userEmail.setPreferredSize(new Dimension(130, 16));
+        userEmail.setText("Label");
         gbc = new GridBagConstraints();
         gbc.gridx = 3;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(0, 5, 10, 0);
-        userPanel.add(label5, gbc);
-        final JLabel label6 = new JLabel();
-        label6.setText("Level:");
+        userPanel.add(userEmail, gbc);
+        final JLabel label4 = new JLabel();
+        label4.setText("Level:");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.WEST;
-        userPanel.add(label6, gbc);
-        final JLabel label7 = new JLabel();
-        label7.setText("Technician");
+        userPanel.add(label4, gbc);
+        userLevel = new JLabel();
+        userLevel.setText("Technician");
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(0, 5, 0, 30);
-        userPanel.add(label7, gbc);
-        final JLabel label8 = new JLabel();
-        label8.setText("DOB:");
+        userPanel.add(userLevel, gbc);
+        final JLabel label5 = new JLabel();
+        label5.setText("DOB:");
         gbc = new GridBagConstraints();
         gbc.gridx = 2;
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(0, 30, 0, 0);
-        userPanel.add(label8, gbc);
-        final JLabel label9 = new JLabel();
-        label9.setText("Label");
+        userPanel.add(label5, gbc);
+        userDOB = new JLabel();
+        userDOB.setText("Label");
         gbc = new GridBagConstraints();
         gbc.gridx = 3;
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(0, 5, 0, 0);
-        userPanel.add(label9, gbc);
+        userPanel.add(userDOB, gbc);
         final JPanel panel2 = new JPanel();
         panel2.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
         panel2.setBackground(new Color(-4605511));
         panel2.setPreferredSize(new Dimension(0, 30));
         mainPanel.add(panel2, BorderLayout.SOUTH);
-        final JLabel label10 = new JLabel();
-        label10.setText("Date:");
-        panel2.add(label10);
-        final JLabel label11 = new JLabel();
-        label11.setText("currentDate");
-        panel2.add(label11);
+        final JLabel label6 = new JLabel();
+        label6.setText("Date:");
+        panel2.add(label6);
+        final JLabel label7 = new JLabel();
+        label7.setText("currentDate");
+        panel2.add(label7);
         menuChoices = new JPanel();
         menuChoices.setLayout(new GridBagLayout());
         menuChoices.setBackground(new Color(-1));

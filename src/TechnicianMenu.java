@@ -49,6 +49,10 @@ public class TechnicianMenu {
         appointmentsButton.setIcon(appointmentsIcon);
         paymentsButton.setIcon(paymentsIcon);
         feedbackButton.setIcon(feedbackIcon);
+        appointmentsButton.addActionListener(e -> {
+            frame.dispose();
+            new DisplayAppointment(user);
+        });
     }
 
     private void setLoggedUser(Technician user) {

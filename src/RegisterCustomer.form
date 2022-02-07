@@ -137,51 +137,6 @@
               <text value="DOB"/>
             </properties>
           </component>
-          <component id="d8ef6" class="javax.swing.JTextField" binding="dayTextField" default-binding="true">
-            <constraints>
-              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-              <gridbag top="10" left="10" bottom="5" right="10" weightx="0.0" weighty="0.0"/>
-            </constraints>
-            <properties>
-              <foreground color="-11513776"/>
-              <horizontalAlignment value="0"/>
-              <minimumSize width="20" height="26"/>
-              <preferredSize width="70" height="26"/>
-              <text value="Day"/>
-            </properties>
-          </component>
-          <component id="9c9ae" class="javax.swing.JTextField" binding="monthTextField" default-binding="true">
-            <constraints>
-              <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-              <gridbag top="10" left="10" bottom="5" right="10" weightx="0.0" weighty="0.0"/>
-            </constraints>
-            <properties>
-              <foreground color="-11513776"/>
-              <horizontalAlignment value="0"/>
-              <minimumSize width="20" height="26"/>
-              <preferredSize width="70" height="26"/>
-              <text value="Month"/>
-            </properties>
-          </component>
-          <component id="8fd9" class="javax.swing.JTextField" binding="yearTextField" default-binding="true">
-            <constraints>
-              <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-              <gridbag top="10" left="10" bottom="5" right="0" weightx="0.0" weighty="0.0"/>
-            </constraints>
-            <properties>
-              <foreground color="-11513776"/>
-              <horizontalAlignment value="0"/>
-              <minimumSize width="25" height="26"/>
-              <preferredSize width="70" height="26"/>
-              <text value="Year"/>
-            </properties>
-          </component>
           <component id="cf17f" class="javax.swing.JComboBox" binding="roomComboBox">
             <constraints>
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
@@ -212,6 +167,33 @@
                 <item value="20"/>
               </model>
               <preferredSize width="76" height="25"/>
+            </properties>
+          </component>
+          <component id="9469b" class="javax.swing.JComboBox" binding="monthComboBox" custom-create="true">
+            <constraints>
+              <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag top="10" left="10" bottom="5" right="10" weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <preferredSize width="70" height="25"/>
+            </properties>
+          </component>
+          <component id="8f56c" class="javax.swing.JComboBox" binding="dayComboBox" custom-create="true">
+            <constraints>
+              <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag top="10" left="10" bottom="5" right="0" weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <preferredSize width="70" height="25"/>
+            </properties>
+          </component>
+          <component id="dc06c" class="javax.swing.JComboBox" binding="yearComboBox" custom-create="true">
+            <constraints>
+              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag top="10" left="10" bottom="5" right="10" weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <preferredSize width="70" height="25"/>
             </properties>
           </component>
         </children>

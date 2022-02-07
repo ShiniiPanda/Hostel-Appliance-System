@@ -3,11 +3,14 @@ import javax.swing.border.TitledBorder;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -15,15 +18,14 @@ public class RegisterCustomer {
     private JPanel panel1;
     private JTextField nameField;
     private JTextField emailField;
-    private JTextField roomField;
     private JButton addCustomerButton;
     private JButton viewAllCustomersButton;
     private JRadioButton maleRadioButton;
     private JRadioButton femaleRadioButton;
-    private JTextField dayTextField;
-    private JTextField monthTextField;
-    private JTextField yearTextField;
     private JComboBox roomComboBox;
+    private JComboBox yearComboBox;
+    private JComboBox monthComboBox;
+    private JComboBox dayComboBox;
     private JFrame frame;
     private ButtonGroup buttonGroup;
 
@@ -37,11 +39,50 @@ public class RegisterCustomer {
         buttonGroup = new ButtonGroup();
         buttonGroup.add(maleRadioButton);
         buttonGroup.add(femaleRadioButton);
+        monthComboBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    Object month = e.getItem();
+                    String monthValue = (String) month;
+                    Object year = yearComboBox.getSelectedItem();
+                    String yearValue = (String) year;
+                    if (monthValue.equals("02")) {
+                        if (Integer.parseInt(yearValue) % 4 == 0) {
+                            dayComboBox.setModel(new DefaultComboBoxModel(Constants.days29));
+                        } else {
+                            dayComboBox.setModel(new DefaultComboBoxModel(Constants.days28));
+                        }
+                    } else if (Arrays.stream(Constants.months31).anyMatch(monthValue::equals)) {
+                        dayComboBox.setModel(new DefaultComboBoxModel(Constants.days31));
+                    } else {
+                        dayComboBox.setModel(new DefaultComboBoxModel(Constants.days30));
+                    }
+                }
+            }
+        });
+        yearComboBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    Object year = e.getItem();
+                    String yearValue = (String) year;
+                    Object month = monthComboBox.getSelectedItem();
+                    String monthValue = (String) month;
+                    if (Integer.parseInt(yearValue) % 4 == 0) {
+                        if (monthValue.equals("02")) {
+                            dayComboBox.setModel(new DefaultComboBoxModel(Constants.days29));
+                        }
+                    }
+                }
+            }
+        });
         addCustomerButton.addActionListener(e -> {
             if (validateInput() == 0) {
                 JOptionPane.showMessageDialog(null, "Customer has been registered successfully!", "Registration Complete", JOptionPane.PLAIN_MESSAGE);
                 addNewCustomer(compileNewData());
-                logRegistration(user, nameField.getText());
+                logRegistration(user.getName(), nameField.getText());
+                resetData();
             }
         });
     }
@@ -62,7 +103,7 @@ public class RegisterCustomer {
 
     private Customer compileNewData() {
         int unqiueID = Customer.fetchCustomerCount() + 1001;
-        String DOB = yearTextField.getText() + "/" + monthTextField.getText() + "/" + dayTextField.getText();
+        String DOB = yearComboBox.getSelectedItem() + "/" + monthComboBox.getSelectedItem() + "/" + dayComboBox.getSelectedItem();
         String gender = maleRadioButton.isSelected() ? "Male" : "Female";
         return new Customer(Integer.toString(unqiueID),
                 nameField.getText(),
@@ -86,26 +127,34 @@ public class RegisterCustomer {
             JOptionPane.showMessageDialog(null, "Please select customer gender!", "Registration Failure", JOptionPane.ERROR_MESSAGE);
             return 1;
         }
-        if (dayTextField.getText().equals("") || monthTextField.getText().equals("") || yearTextField.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Please input correct date of birth!", "Registration Failure", JOptionPane.ERROR_MESSAGE);
+        if (!emailField.getText().contains("@")) {
+            JOptionPane.showMessageDialog(null, "Please input a valid email address!", "Registration Failure", JOptionPane.ERROR_MESSAGE);
             return 1;
         }
         return 0;
     }
 
-    private void logRegistration(Manager user, String name){
+    private void logRegistration(String managerName, String name) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime date = LocalDateTime.now();
         String logDate = "[" + formatter.format(date) + "] ";
         try {
             FileWriter fileWriter = new FileWriter("./TextFiles/AuditLogs.txt", true);
             BufferedWriter file = new BufferedWriter(fileWriter);
-            file.write(logDate + name + " Successfully Registered By Manager " + user.getName());
+            file.write(logDate + name + " Successfully Registered By Manager " + managerName);
             file.close();
             fileWriter.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    private void resetData(){
+        nameField.setText("");
+        emailField.setText("");
+        roomComboBox.setSelectedIndex(0);
+        maleRadioButton.setSelected(false);
+        femaleRadioButton.setSelected(false);
     }
 
     /**
@@ -116,6 +165,7 @@ public class RegisterCustomer {
      * @noinspection ALL
      */
     private void $$$setupUI$$$() {
+        createUIComponents();
         panel1 = new JPanel();
         panel1.setLayout(new BorderLayout(0, 0));
         final JPanel panel2 = new JPanel();
@@ -234,44 +284,6 @@ public class RegisterCustomer {
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(10, 0, 5, 0);
         panel3.add(label6, gbc);
-        dayTextField = new JTextField();
-        dayTextField.setForeground(new Color(-16777216));
-        dayTextField.setHorizontalAlignment(0);
-        dayTextField.setMinimumSize(new Dimension(20, 26));
-        dayTextField.setPreferredSize(new Dimension(70, 26));
-        dayTextField.setText("Day");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 1;
-        gbc.gridy = 4;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(10, 10, 5, 10);
-        panel3.add(dayTextField, gbc);
-        monthTextField = new JTextField();
-        monthTextField.setForeground(new Color(-16777216));
-        monthTextField.setHorizontalAlignment(0);
-        monthTextField.setMinimumSize(new Dimension(20, 26));
-        monthTextField.setPreferredSize(new Dimension(70, 26));
-        monthTextField.setText("Month");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 2;
-        gbc.gridy = 4;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(10, 10, 5, 10);
-        panel3.add(monthTextField, gbc);
-        yearTextField = new JTextField();
-        yearTextField.setForeground(new Color(-16777216));
-        yearTextField.setHorizontalAlignment(0);
-        yearTextField.setMinimumSize(new Dimension(25, 26));
-        yearTextField.setPreferredSize(new Dimension(70, 26));
-        yearTextField.setText("Year");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 3;
-        gbc.gridy = 4;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(10, 10, 5, 0);
-        panel3.add(yearTextField, gbc);
         roomComboBox = new JComboBox();
         roomComboBox.setMinimumSize(new Dimension(81, 38));
         final DefaultComboBoxModel defaultComboBoxModel1 = new DefaultComboBoxModel();
@@ -304,6 +316,30 @@ public class RegisterCustomer {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 10, 10, 0);
         panel3.add(roomComboBox, gbc);
+        monthComboBox.setPreferredSize(new Dimension(70, 25));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 2;
+        gbc.gridy = 4;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10, 10, 5, 10);
+        panel3.add(monthComboBox, gbc);
+        dayComboBox.setPreferredSize(new Dimension(70, 25));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 3;
+        gbc.gridy = 4;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10, 10, 5, 0);
+        panel3.add(dayComboBox, gbc);
+        yearComboBox.setPreferredSize(new Dimension(70, 25));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10, 10, 5, 10);
+        panel3.add(yearComboBox, gbc);
         final JPanel panel4 = new JPanel();
         panel4.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 5));
         panel4.setBackground(new Color(-1));
@@ -348,4 +384,12 @@ public class RegisterCustomer {
         return panel1;
     }
 
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+        yearComboBox = new JComboBox(Constants.years);
+        monthComboBox = new JComboBox(Constants.months);
+        dayComboBox = new JComboBox(Constants.days31);
+    }
+
 }
+

@@ -141,7 +141,7 @@ public class RegisterCustomer {
         try {
             FileWriter fileWriter = new FileWriter("./TextFiles/AuditLogs.txt", true);
             BufferedWriter file = new BufferedWriter(fileWriter);
-            file.write(logDate + name + " Successfully Registered By Manager " + managerName);
+            file.write(logDate + name + " Successfully Registered By Manager " + managerName + "\n");
             file.close();
             fileWriter.close();
         } catch (IOException e) {
@@ -149,7 +149,7 @@ public class RegisterCustomer {
         }
     }
 
-    private void resetData(){
+    private void resetData() {
         nameField.setText("");
         emailField.setText("");
         roomComboBox.setSelectedIndex(0);

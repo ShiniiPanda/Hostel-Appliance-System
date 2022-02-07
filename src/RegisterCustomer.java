@@ -6,6 +6,8 @@ import java.awt.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -39,6 +41,7 @@ public class RegisterCustomer {
             if (validateInput() == 0) {
                 JOptionPane.showMessageDialog(null, "Customer has been registered successfully!", "Registration Complete", JOptionPane.PLAIN_MESSAGE);
                 addNewCustomer(compileNewData());
+                logRegistration(user, nameField.getText());
             }
         });
     }
@@ -88,6 +91,21 @@ public class RegisterCustomer {
             return 1;
         }
         return 0;
+    }
+
+    private void logRegistration(Manager user, String name){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime date = LocalDateTime.now();
+        String logDate = "[" + formatter.format(date) + "] ";
+        try {
+            FileWriter fileWriter = new FileWriter("./TextFiles/AuditLogs.txt", true);
+            BufferedWriter file = new BufferedWriter(fileWriter);
+            file.write(logDate + name + " Successfully Registered By Manager " + user.getName());
+            file.close();
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**

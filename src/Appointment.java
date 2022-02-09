@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Appointment {
+public class Appointment implements TextStored {
 
     private Customer customer;
     private String id, status, startDate, endDate;
@@ -268,6 +268,7 @@ public class Appointment {
         }
     }
 
+    @Override
     public String toTextFormat(){
         return this.id + "//" + this.customer.getId() + "//" + this.technician.getId() + "//" + this.status + "//" +
                 this.startDate + "//" + this.endDate + "//" + this.appliance.getId();

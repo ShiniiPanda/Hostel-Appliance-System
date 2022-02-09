@@ -26,6 +26,7 @@ public class Login {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 400);
         frame.setVisible(true);
+        frame.getRootPane().setDefaultButton(loginButton);
         loginButton.addActionListener(e -> {
             String user = nameInput.getText(),
                     pass = passInput.getText();

@@ -53,6 +53,10 @@ public class TechnicianMenu {
             frame.dispose();
             new DisplayAppointment(user);
         });
+        paymentsButton.addActionListener(e -> {
+            frame.dispose();
+            new Payment(user);
+        });
     }
 
     private void setLoggedUser(Technician user) {

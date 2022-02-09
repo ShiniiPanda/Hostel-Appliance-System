@@ -11,6 +11,7 @@ public class User extends Person {
         this.password = "null";
     }
 
+
     public User(String id, String password, String name, String role, String email, String DOB){
         super(id, name, role, email, DOB);
         this.password = password;
@@ -51,5 +52,29 @@ public class User extends Person {
             System.out.println(e.getMessage());
         }
         return new LoginResponse(1, null); // Username not found
+    }
+
+    public static User fetchUserById(String id) {
+        String line;
+        String[] lineArgs;
+        User user = null;
+        try {
+            FileReader fileReader = new FileReader("./TextFiles/Employees.txt");
+            BufferedReader file = new BufferedReader(fileReader);
+            while ((line = file.readLine()) != null) {
+                lineArgs = line.strip().split("//");
+                if (lineArgs[0].equals(id)) {
+                    user = new User(lineArgs[0],
+                            lineArgs[1],
+                            lineArgs[2],
+                            lineArgs[3],
+                            lineArgs[4],
+                            lineArgs[5]);
+                }
+            }
+        } catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        return user;
     }
 }

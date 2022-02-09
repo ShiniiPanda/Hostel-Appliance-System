@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,21 +7,24 @@ public class Appointment {
     private Customer customer;
     private String id, status, startDate, endDate;
     private HomeAppliance appliance;
+    private Technician technician;
 
-    // Text File Storage Format: ID//CustomerID//Status//StartDate//EndDate//ApplianceID
+    // Text File Storage Format: ID//CustomerID//Technician//Status//StartDate//EndDate//ApplianceID
 
     public Appointment(){
         this.id = "000";
         this.customer = new Customer();
+        this.technician = new Technician();
         this.status = "unknown";
         this.startDate = "00/00/0000";
         this.endDate = "00/00/0000";
         this.appliance = new HomeAppliance();
     }
 
-    public Appointment(String id, Customer customer, String status, String startDate, String endDate, HomeAppliance appliance) {
+    public Appointment(String id, Customer customer, Technician technician, String status, String startDate, String endDate, HomeAppliance appliance) {
         this.id = id;
         this.customer = customer;
+        this.technician = technician;
         this.status = status;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -44,6 +45,14 @@ public class Appointment {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public Technician getTechnician() {
+        return technician;
+    }
+
+    public void setTechnician(Technician technician) {
+        this.technician = technician;
     }
 
     public String getStatus() {
@@ -78,7 +87,7 @@ public class Appointment {
         this.appliance = appliance;
     }
 
-    public static List<Appointment> fetchAppointments(){
+    public static List<Appointment> fetchAllAppointments(){
         List<Appointment> appointmentList = new ArrayList<>();
         String line;
         String [] lineArgs;
@@ -90,10 +99,11 @@ public class Appointment {
                 appointmentList.add(new Appointment(
                         lineArgs[0],
                         Customer.fetchById(lineArgs[1]),
-                        lineArgs[2],
+                        new Technician(User.fetchUserById(lineArgs[2])),
                         lineArgs[3],
                         lineArgs[4],
-                        HomeAppliance.fetchById(lineArgs[5])
+                        lineArgs[5],
+                        HomeAppliance.fetchById(lineArgs[6])
                 ));
             }
         } catch (IOException e) {
@@ -103,7 +113,7 @@ public class Appointment {
     }
 
     //Overloaded type of fetchAppointments to handle Appointment Status
-    public static List<Appointment> fetchAppointments(String status){
+    public static List<Appointment> fetchAllAppointments(String status){
         List<Appointment> appointmentList = new ArrayList<>();
         String line;
         String [] lineArgs;
@@ -112,14 +122,72 @@ public class Appointment {
             BufferedReader file = new BufferedReader(fileReader);
             while ((line = file.readLine()) != null) {
                 lineArgs = line.strip().split("//");
-                if (lineArgs[2].equals(status.toUpperCase())){
+                if (lineArgs[3].equals(status.toUpperCase())){
                     appointmentList.add(new Appointment(
                             lineArgs[0],
                             Customer.fetchById(lineArgs[1]),
-                            lineArgs[2],
+                            new Technician(User.fetchUserById(lineArgs[2])),
                             lineArgs[3],
                             lineArgs[4],
-                            HomeAppliance.fetchById(lineArgs[5])
+                            lineArgs[5],
+                            HomeAppliance.fetchById(lineArgs[6])
+                    ));
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return appointmentList;
+    }
+
+    public static List<Appointment> fetchIndividualAppointments(Technician technician){
+        List<Appointment> appointmentList = new ArrayList<>();
+        String line;
+        String [] lineArgs;
+        try {
+            FileReader fileReader = new FileReader("./TextFiles/Appointments.txt");
+            BufferedReader file = new BufferedReader(fileReader);
+            while ((line = file.readLine()) != null) {
+                lineArgs = line.strip().split("//");
+                if (lineArgs[2].equals(technician.getId())) {
+                    appointmentList.add(new Appointment(
+                            lineArgs[0],
+                            Customer.fetchById(lineArgs[1]),
+                            new Technician(User.fetchUserById(lineArgs[2])),
+                            lineArgs[3],
+                            lineArgs[4],
+                            lineArgs[5],
+                            HomeAppliance.fetchById(lineArgs[6])
+                    ));
+                }
+            }
+            file.close();
+            fileReader.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return appointmentList;
+    }
+
+    public static List<Appointment> fetchIndividualAppointments(Technician technician, String status){
+        List<Appointment> appointmentList = new ArrayList<>();
+        String line;
+        String [] lineArgs;
+        try {
+            FileReader fileReader = new FileReader("./TextFiles/Appointments.txt");
+            BufferedReader file = new BufferedReader(fileReader);
+            while ((line = file.readLine()) != null) {
+                lineArgs = line.strip().split("//");
+                if ((lineArgs[2].equals(technician.getId())) &&
+                        (lineArgs[3].equals(status.toUpperCase()))){
+                    appointmentList.add(new Appointment(
+                            lineArgs[0],
+                            Customer.fetchById(lineArgs[1]),
+                            new Technician(User.fetchUserById(lineArgs[2])),
+                            lineArgs[3],
+                            lineArgs[4],
+                            lineArgs[5],
+                            HomeAppliance.fetchById(lineArgs[6])
                     ));
                 }
             }
@@ -141,10 +209,11 @@ public class Appointment {
                     return new Appointment(
                             lineArgs[0],
                             Customer.fetchById(lineArgs[1]),
-                            lineArgs[2],
+                            new Technician(User.fetchUserById(lineArgs[2])),
                             lineArgs[3],
                             lineArgs[4],
-                            HomeAppliance.fetchById(lineArgs[5]));
+                            lineArgs[5],
+                            HomeAppliance.fetchById(lineArgs[6]));
                 }
             }
             file.close();
@@ -154,4 +223,54 @@ public class Appointment {
         }
         return new Appointment();
     }
+
+    public static void updateAppointment(Appointment appointment){
+        int recordNumber = -1, lineNumber = 0;
+        List<String> fileRows = new ArrayList<String>();
+        String row;
+        String id;
+        try {
+            FileReader fileReader = new FileReader("./TextFiles/Appointments.txt");
+            BufferedReader read = new BufferedReader(fileReader);
+            while ((row = read.readLine()) != null) {
+                fileRows.add(row);
+                id = row.substring(0, 4);
+                if (id.equals(appointment.getId())){
+                    recordNumber = lineNumber;
+                }
+                lineNumber++;
+            }
+            if (recordNumber != -1 ) {
+                fileRows.set(recordNumber, appointment.toTextFormat());
+            } else {
+                return;
+            }
+            fileReader.close();
+            read.close();
+            rewriteFile(fileRows);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void rewriteFile(List<String> rows) {
+        try {
+            FileWriter fileWriter = new FileWriter("./TextFiles/Appointments.txt");
+            BufferedWriter writer = new BufferedWriter(fileWriter);
+            for (String line : rows) {
+                writer.write(line);
+                writer.newLine();
+            }
+            writer.close();
+            fileWriter.close();
+        } catch (IOException e){
+            System.out.println("Error in writing");
+        }
+    }
+
+    public String toTextFormat(){
+        return this.id + "//" + this.customer.getId() + "//" + this.technician.getId() + "//" + this.status + "//" +
+                this.startDate + "//" + this.endDate + "//" + this.appliance.getId();
+    }
+
 }

@@ -80,26 +80,13 @@ public class RegisterCustomer {
         addCustomerButton.addActionListener(e -> {
             if (validateInput() == 0) {
                 JOptionPane.showMessageDialog(null, "Customer has been registered successfully!", "Registration Complete", JOptionPane.PLAIN_MESSAGE);
-                addNewCustomer(compileNewData());
+                Customer.addNewCustomer(compileNewData());
                 logRegistration(user.getName(), nameField.getText());
                 resetData();
             }
         });
     }
 
-    private void addNewCustomer(Customer c) {
-        String record = "" + c.getId() + "//" + c.getName() + "//" + c.getRole() + "//" + c.getGender() + "//" +
-                c.getEmail() + "//" + c.getDOB() + "//" + c.getRoomNumber() + "\n";
-        try {
-            FileWriter fileWriter = new FileWriter("./TextFiles/Customers.txt", true);
-            BufferedWriter file = new BufferedWriter(fileWriter);
-            file.write(record);
-            file.close();
-            fileWriter.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
 
     private Customer compileNewData() {
         int unqiueID = Customer.fetchCustomerCount() + 1001;

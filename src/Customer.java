@@ -1,10 +1,8 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Customer extends Person{
+public class Customer extends Person implements TextStored {
 
     // Customer Text File Format : ID//NAME//ROLE//EMAIL//DOB//ROOM
 
@@ -106,6 +104,19 @@ public class Customer extends Person{
         return count;
     }
 
+    public static void addNewCustomer(Customer c) {
+        String record = c.toTextFormat() + "\n";
+        try {
+            FileWriter fileWriter = new FileWriter("./TextFiles/Customers.txt", true);
+            BufferedWriter file = new BufferedWriter(fileWriter);
+            file.write(record);
+            file.close();
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
@@ -117,5 +128,11 @@ public class Customer extends Person{
                 ", Gender='" + gender + '\'' +
                 ", roomNumber=" + roomNumber +
                 '}';
+    }
+
+    @Override
+    public String toTextFormat() {
+        return this.getId() + "//" + this.getName() + "//" + this.getRole() + "//" + this.getGender() + "//" +
+                this.getEmail() + "//" + this.getDOB() + "//" + this.getRoomNumber();
     }
 }

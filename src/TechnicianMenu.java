@@ -57,6 +57,10 @@ public class TechnicianMenu {
             frame.dispose();
             new Payment(user);
         });
+        feedbackButton.addActionListener(e -> {
+            frame.dispose();
+            new FeedbackForm(user);
+        });
     }
 
     private void setLoggedUser(Technician user) {

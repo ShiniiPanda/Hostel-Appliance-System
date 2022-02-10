@@ -4,6 +4,8 @@ import javax.swing.border.TitledBorder;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class TechnicianMenu {
@@ -22,6 +24,7 @@ public class TechnicianMenu {
     private JLabel userLevel;
     private JLabel userEmail;
     private JLabel userDOB;
+    private JLabel currentDate;
 
     // Default menu with no user set (not currently used)
     public TechnicianMenu() {
@@ -29,8 +32,10 @@ public class TechnicianMenu {
         $$$setupUI$$$();
         frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 500);
+        frame.setSize(500, 400);
+        frame.setMinimumSize(new Dimension(500, 300));
         frame.setVisible(true);
+        setCurrentDate();
     }
 
     // Menu accessed through system login, will call setLoggedUser()
@@ -39,7 +44,7 @@ public class TechnicianMenu {
         $$$setupUI$$$();
         frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 500);
+        frame.setSize(500, 400);
         frame.setMinimumSize(new Dimension(500, 300));
         frame.setVisible(true);
         this.setLoggedUser(user);
@@ -49,6 +54,7 @@ public class TechnicianMenu {
         appointmentsButton.setIcon(appointmentsIcon);
         paymentsButton.setIcon(paymentsIcon);
         feedbackButton.setIcon(feedbackIcon);
+        setCurrentDate();
         appointmentsButton.addActionListener(e -> {
             frame.dispose();
             new DisplayAppointment(user);
@@ -68,6 +74,12 @@ public class TechnicianMenu {
         userLevel.setText(user.getRole());
         userEmail.setText(user.getEmail());
         userDOB.setText(user.getDOB());
+    }
+
+    private void setCurrentDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDateTime date = LocalDateTime.now();
+        currentDate.setText(formatter.format(date));
     }
 
 //    profilePic = new JLabel();
@@ -216,9 +228,9 @@ public class TechnicianMenu {
         final JLabel label6 = new JLabel();
         label6.setText("Date:");
         panel2.add(label6);
-        final JLabel label7 = new JLabel();
-        label7.setText("currentDate");
-        panel2.add(label7);
+        currentDate = new JLabel();
+        currentDate.setText("currentDate");
+        panel2.add(currentDate);
         menuChoices = new JPanel();
         menuChoices.setLayout(new GridBagLayout());
         menuChoices.setBackground(new Color(-1));

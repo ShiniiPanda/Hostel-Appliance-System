@@ -4,6 +4,8 @@ import javax.swing.border.TitledBorder;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class ManagerMenu {
@@ -16,12 +18,13 @@ public class ManagerMenu {
     private JPanel picPanel;
     private JPanel menuChoices;
     private JButton registerCustomerButton;
-    private JButton editUsersButton;
-    private JButton createAppointmentButton;
+    private JButton manageUsersButton;
+    private JButton registerAppointmentButton;
     private JLabel userName;
     private JLabel userLevel;
     private JLabel userEmail;
     private JLabel userDOB;
+    private JLabel currentDate;
 
     // Default menu with no user set (not currently used)
     public ManagerMenu() {
@@ -29,8 +32,10 @@ public class ManagerMenu {
         $$$setupUI$$$();
         frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 500);
+        frame.setSize(500, 400);
+        frame.setMinimumSize(new Dimension(500, 300));
         frame.setVisible(true);
+        setCurrentDate();
     }
 
     // Menu accessed through system login, will call setLoggedUser()
@@ -39,7 +44,7 @@ public class ManagerMenu {
         $$$setupUI$$$();
         frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 500);
+        frame.setSize(500, 400);
         frame.setMinimumSize(new Dimension(500, 300));
         frame.setVisible(true);
         this.setLoggedUser(user);
@@ -49,6 +54,11 @@ public class ManagerMenu {
         });
         ImageIcon registerIcon = new ImageIcon("./Icons/Register.png");
         registerCustomerButton.setIcon(registerIcon);
+        setCurrentDate();
+        registerAppointmentButton.addActionListener(e -> {
+            frame.dispose();
+            new RegisterAppointment(user);
+        });
     }
 
     private void setLoggedUser(Manager user) {
@@ -56,6 +66,12 @@ public class ManagerMenu {
         userLevel.setText(user.getRole());
         userEmail.setText(user.getEmail());
         userDOB.setText(user.getDOB());
+    }
+
+    private void setCurrentDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDateTime date = LocalDateTime.now();
+        currentDate.setText(formatter.format(date));
     }
 
 //    profilePic = new JLabel();
@@ -204,9 +220,9 @@ public class ManagerMenu {
         final JLabel label6 = new JLabel();
         label6.setText("Date:");
         panel2.add(label6);
-        final JLabel label7 = new JLabel();
-        label7.setText("currentDate");
-        panel2.add(label7);
+        currentDate = new JLabel();
+        currentDate.setText("currentDate");
+        panel2.add(currentDate);
         menuChoices = new JPanel();
         menuChoices.setLayout(new GridBagLayout());
         menuChoices.setBackground(new Color(-1));
@@ -222,28 +238,28 @@ public class ManagerMenu {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(0, 0, 0, 15);
         menuChoices.add(registerCustomerButton, gbc);
-        editUsersButton = new JButton();
-        editUsersButton.setHorizontalTextPosition(0);
-        editUsersButton.setPreferredSize(new Dimension(101, 100));
-        editUsersButton.setText("Edit Users");
-        editUsersButton.setVerticalTextPosition(3);
+        manageUsersButton = new JButton();
+        manageUsersButton.setHorizontalTextPosition(0);
+        manageUsersButton.setPreferredSize(new Dimension(101, 100));
+        manageUsersButton.setText("Manage Users");
+        manageUsersButton.setVerticalTextPosition(3);
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(0, 15, 0, 15);
-        menuChoices.add(editUsersButton, gbc);
-        createAppointmentButton = new JButton();
-        createAppointmentButton.setHorizontalTextPosition(0);
-        createAppointmentButton.setPreferredSize(new Dimension(160, 100));
-        createAppointmentButton.setText("Create Appointment");
-        createAppointmentButton.setVerticalTextPosition(3);
+        menuChoices.add(manageUsersButton, gbc);
+        registerAppointmentButton = new JButton();
+        registerAppointmentButton.setHorizontalTextPosition(0);
+        registerAppointmentButton.setPreferredSize(new Dimension(160, 100));
+        registerAppointmentButton.setText("Register Appointment");
+        registerAppointmentButton.setVerticalTextPosition(3);
         gbc = new GridBagConstraints();
         gbc.gridx = 2;
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(0, 15, 0, 0);
-        menuChoices.add(createAppointmentButton, gbc);
+        menuChoices.add(registerAppointmentButton, gbc);
     }
 
     /**

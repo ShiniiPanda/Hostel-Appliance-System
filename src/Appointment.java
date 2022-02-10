@@ -224,6 +224,33 @@ public class Appointment implements TextStored {
         return new Appointment();
     }
 
+    public static int fetchAppointmentCount(){
+        int count = 0;
+        try {
+            FileReader fileReader = new FileReader("./TextFiles/Appointments.txt");
+            BufferedReader file = new BufferedReader(fileReader);
+            while (file.readLine() != null) count++;
+            file.close();
+            fileReader.close();
+        } catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        return count;
+    }
+
+    public static void addNewAppointment(Appointment a){
+        String record = a.toTextFormat() + "\n";
+        try {
+            FileWriter fileWriter = new FileWriter("./TextFiles/Appointments.txt", true);
+            BufferedWriter writer = new BufferedWriter(fileWriter);
+            writer.write(record);
+            writer.close();
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage() + "\nError writing appointment");
+        }
+    }
+
     public static void updateAppointment(Appointment appointment){
         int recordNumber = -1, lineNumber = 0;
         List<String> fileRows = new ArrayList<String>();

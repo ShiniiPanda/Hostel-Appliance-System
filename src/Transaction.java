@@ -1,36 +1,23 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Transaction {
+public class Transaction implements TextStored {
 
-    private Customer sender;
     private String invoiceID;
     private Appointment appointment;
     private float amount;
 
     public Transaction() {
         this.invoiceID = "000";
-        this.sender = new Customer();
         this.appointment = new Appointment();
         this.amount = 0;
     }
 
-    public Transaction(String invoiceID, Customer sender, Appointment appointment, float amount) {
+    public Transaction(String invoiceID, Appointment appointment, float amount) {
         this.invoiceID = invoiceID;
-        this.sender = sender;
         this.appointment = appointment;
         this.amount = amount;
-    }
-
-    public Customer getSender() {
-        return sender;
-    }
-
-    public void setSender(Customer sender) {
-        this.sender = sender;
     }
 
     public String getInvoiceID() {
@@ -57,7 +44,7 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public static List<Transaction> fetchTransactions(){
+    public static List<Transaction> fetchAllTransactions(){
         List<Transaction> transactionList = new ArrayList<>();
         String line;
         String [] lineArgs;
@@ -68,9 +55,8 @@ public class Transaction {
                 lineArgs = line.strip().split("//");
                 transactionList.add(new Transaction(
                         lineArgs[0],
-                        Customer.fetchById(lineArgs[1]),
-                        Appointment.fetchById(lineArgs[2]),
-                        Float.parseFloat(lineArgs[3])
+                        Appointment.fetchById(lineArgs[1]),
+                        Float.parseFloat(lineArgs[2])
                 ));
             }
         } catch (IOException e) {
@@ -79,4 +65,35 @@ public class Transaction {
         return transactionList;
     }
 
+    public static int fetchTransactionCount(){
+        int count = 0;
+        try {
+            FileReader fileReader = new FileReader("./TextFiles/Transactions.txt");
+            BufferedReader file = new BufferedReader(fileReader);
+            while (file.readLine() != null) count++;
+            file.close();
+            fileReader.close();
+        } catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        return count;
+    }
+
+    public static void addNewTransaction(Transaction t){
+        String record = t.toTextFormat() + "\n";
+        try {
+            FileWriter fileWriter = new FileWriter("./TextFiles/Transactions.txt", true);
+            BufferedWriter writer = new BufferedWriter(fileWriter);
+            writer.write(record);
+            writer.close();
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage() + "\nError writing transaction");
+        }
+    }
+
+    @Override
+    public String toTextFormat() {
+        return this.invoiceID + "//" + this.appointment.getId() + "//" + this.amount;
+    }
 }

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="DisplayAppointment">
+  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties>
+      <preferredSize width="700" height="220"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="5bdd6" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="North"/>
+        <properties>
+          <background color="-4605511"/>
+          <preferredSize width="0" height="50"/>
+        </properties>
+        <border type="line"/>
+        <children>
+          <component id="525a9" class="javax.swing.JLabel">
+            <constraints border-constraint="Center"/>
+            <properties>
+              <background color="-4605511"/>
+              <font name="Serif" size="24" style="1"/>
+              <foreground color="-16777216"/>
+              <horizontalAlignment value="0"/>
+              <text value="Appliance Appointments"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="317ae" binding="mainPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="line">
+          <color color="-15000805"/>
+        </border>
+        <children>
+          <grid id="b2b2f" layout-manager="FlowLayout" hgap="20" vgap="10" flow-align="1">
+            <constraints border-constraint="North"/>
+            <properties>
+              <background color="-1"/>
+              <foreground color="-1"/>
+              <preferredSize width="0" height="40"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="c9958" class="javax.swing.JComboBox" binding="statusComboBox">
+                <constraints/>
+                <properties>
+                  <model>
+                    <item value="All Appointments"/>
+                    <item value="Pending Appointments"/>
+                    <item value="Completed Appointments"/>
+                    <item value="Cancelled Appointments"/>
+                  </model>
+                  <preferredSize width="200" height="25"/>
+                </properties>
+              </component>
+              <component id="b50de" class="javax.swing.JButton" binding="updateTableButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <preferredSize width="120" height="25"/>
+                  <text value="Update Table"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="4d55a" binding="bottomPanel" layout-manager="FlowLayout" hgap="5" vgap="10" flow-align="1">
+            <constraints border-constraint="South"/>
+            <properties>
+              <background color="-1"/>
+              <preferredSize width="0" height="130"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="41680" class="javax.swing.JButton" binding="collectPaymentButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <preferredSize width="500" height="30"/>
+                  <text value="Collect Payment"/>
+                </properties>
+              </component>
+              <component id="8d509" class="javax.swing.JButton" binding="addFeedbackButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <preferredSize width="500" height="30"/>
+                  <text value="Add Feedback"/>
+                </properties>
+              </component>
+              <component id="22eb5" class="javax.swing.JButton" binding="returnToMenuButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <preferredSize width="300" height="30"/>
+                  <text value="Return To Menu"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="6315b" binding="tabelPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints border-constraint="Center"/>
+            <properties>
+              <background color="-1"/>
+              <preferredSize width="20" height="0"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <scrollpane id="45006" binding="tableScrollPane" custom-create="true">
+                <constraints border-constraint="Center"/>
+                <properties/>
+                <border type="none"/>
+                <children/>
+              </scrollpane>
+              <grid id="8f825" binding="tableRightGap" layout-manager="BorderLayout" hgap="0" vgap="0">
+                <constraints border-constraint="West"/>
+                <properties>
+                  <maximumSize width="10" height="2147483647"/>
+                  <preferredSize width="10" height="0"/>
+                </properties>
+                <border type="none"/>
+                <children/>
+              </grid>
+              <grid id="bef7d" binding="tableLeftGap" layout-manager="BorderLayout" hgap="0" vgap="0">
+                <constraints border-constraint="East"/>
+                <properties>
+                  <maximumSize width="10" height="2147483647"/>
+                  <preferredSize width="10" height="0"/>
+                </properties>
+                <border type="none"/>
+                <children/>
+              </grid>
+            </children>
+          </grid>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>

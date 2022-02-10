@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="FeedbackForm">
+  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="f76ed" binding="titlePanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="North"/>
+        <properties>
+          <background color="-4605511"/>
+          <preferredSize width="0" height="50"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="d0d70" class="javax.swing.JLabel">
+            <constraints border-constraint="Center"/>
+            <properties>
+              <font name="Serif" size="28" style="1"/>
+              <foreground color="-16777216"/>
+              <horizontalAlignment value="0"/>
+              <text value="Feedback"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="50f0f" binding="mainPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="line">
+          <title-color color="-15000805"/>
+        </border>
+        <children>
+          <grid id="d9932" binding="footerPanel" layout-manager="FlowLayout" hgap="20" vgap="5" flow-align="1">
+            <constraints border-constraint="South"/>
+            <properties>
+              <background color="-1"/>
+              <preferredSize width="0" height="90"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="bd053" class="javax.swing.JButton" binding="submitFeedbackButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <background color="-1"/>
+                  <font size="14"/>
+                  <foreground color="-16720892"/>
+                  <preferredSize width="300" height="30"/>
+                  <text value="Submit Feedback"/>
+                </properties>
+              </component>
+              <component id="4757f" class="javax.swing.JButton" binding="cancelButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <background color="-1"/>
+                  <font size="14"/>
+                  <foreground color="-3864057"/>
+                  <preferredSize width="200" height="30"/>
+                  <text value="Cancel"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="30a98" binding="inputPanel" layout-manager="GridBagLayout">
+            <constraints border-constraint="Center"/>
+            <properties>
+              <background color="-1"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="2dd74" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag top="5" left="5" bottom="10" right="10" weightx="0.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <font name="Arial" size="18" style="0"/>
+                  <foreground color="-16777216"/>
+                  <preferredSize width="110" height="22"/>
+                  <text value="Appointment:"/>
+                </properties>
+              </component>
+              <component id="62d5e" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag top="10" left="5" bottom="10" right="10" weightx="0.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <font name="Arial" size="18" style="0"/>
+                  <foreground color="-16777216"/>
+                  <text value="Appliance:"/>
+                </properties>
+              </component>
+              <component id="6da22" class="javax.swing.JComboBox" binding="appointmentComboBox" custom-create="true">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag top="5" left="5" bottom="10" right="5" weightx="0.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <preferredSize width="180" height="25"/>
+                </properties>
+              </component>
+              <component id="50f8f" class="javax.swing.JTextField" binding="applianceField">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                  <gridbag top="10" left="5" bottom="10" right="5" weightx="0.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <disabledTextColor color="-16777216"/>
+                  <editable value="false"/>
+                  <horizontalAlignment value="0"/>
+                  <preferredSize width="180" height="25"/>
+                </properties>
+              </component>
+              <component id="6819f" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag top="10" left="5" bottom="5" right="10" weightx="0.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <font name="Arial" size="18" style="0"/>
+                  <foreground color="-16777216"/>
+                  <text value="Rating:"/>
+                </properties>
+              </component>
+              <component id="d68ce" class="javax.swing.JRadioButton" binding="rating1">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag top="10" left="5" bottom="5" right="5" weightx="0.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <focusable value="false"/>
+                  <foreground color="-16777216"/>
+                  <horizontalTextPosition value="0"/>
+                  <opaque value="false"/>
+                  <text value="1"/>
+                  <verticalTextPosition value="3"/>
+                </properties>
+              </component>
+              <component id="62348" class="javax.swing.JRadioButton" binding="rating2">
+                <constraints>
+                  <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag top="10" left="5" bottom="5" right="5" weightx="0.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <focusable value="false"/>
+                  <foreground color="-16777216"/>
+                  <horizontalTextPosition value="0"/>
+                  <opaque value="false"/>
+                  <text value="2"/>
+                  <verticalTextPosition value="3"/>
+                </properties>
+              </component>
+              <component id="aaa3b" class="javax.swing.JRadioButton" binding="rating3">
+                <constraints>
+                  <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag top="10" left="5" bottom="5" right="5" weightx="0.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <focusable value="false"/>
+                  <foreground color="-16777216"/>
+                  <horizontalTextPosition value="0"/>
+                  <opaque value="false"/>
+                  <text value="3"/>
+                  <verticalTextPosition value="3"/>
+                </properties>
+              </component>
+              <component id="a5c97" class="javax.swing.JRadioButton" binding="rating4">
+                <constraints>
+                  <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag top="10" left="5" bottom="5" right="5" weightx="0.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <focusable value="false"/>
+                  <foreground color="-16777216"/>
+                  <horizontalTextPosition value="0"/>
+                  <opaque value="false"/>
+                  <text value="4"/>
+                  <verticalTextPosition value="3"/>
+                </properties>
+              </component>
+              <component id="20680" class="javax.swing.JRadioButton" binding="rating5">
+                <constraints>
+                  <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag top="10" left="5" bottom="5" right="5" weightx="0.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <focusable value="false"/>
+                  <foreground color="-16777216"/>
+                  <horizontalTextPosition value="0"/>
+                  <opaque value="false"/>
+                  <text value="5"/>
+                  <verticalTextPosition value="3"/>
+                </properties>
+              </component>
+              <component id="ad8a9" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag top="10" left="5" bottom="5" right="10" weightx="0.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <font name="Arial" size="18" style="0"/>
+                  <foreground color="-16777216"/>
+                  <text value="Review:"/>
+                </properties>
+              </component>
+              <component id="e672b" class="javax.swing.JTextArea" binding="reviewTextArea" custom-create="true">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="5" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="50"/>
+                  </grid>
+                  <gridbag top="10" left="5" bottom="5" right="5" weightx="0.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <lineWrap value="true"/>
+                  <preferredSize width="250" height="90"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>

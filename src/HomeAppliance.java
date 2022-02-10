@@ -2,6 +2,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeAppliance {
 
@@ -60,9 +62,34 @@ public class HomeAppliance {
                     );
                 }
             }
+            file.close();
+            fileReader.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
         return new HomeAppliance();
+    }
+
+    public static List<HomeAppliance> fetchAllAppliance(){
+        List<HomeAppliance> applianceList = new ArrayList<>();
+        String line;
+        String [] lineArgs;
+        try {
+            FileReader fileReader = new FileReader("./TextFiles/Appliances.txt");
+            BufferedReader file = new BufferedReader(fileReader);
+            while ((line = file.readLine()) != null) {
+                lineArgs = line.strip().split("//");
+                    applianceList.add(new HomeAppliance(
+                            lineArgs[0],
+                            lineArgs[1],
+                            Float.parseFloat(lineArgs[2])
+                    ));
+            }
+            file.close();
+            fileReader.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return applianceList;
     }
 }

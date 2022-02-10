@@ -166,7 +166,7 @@
                   <text value="Date:"/>
                 </properties>
               </component>
-              <component id="57456" class="javax.swing.JLabel">
+              <component id="57456" class="javax.swing.JLabel" binding="currentDate">
                 <constraints/>
                 <properties>
                   <text value="currentDate"/>

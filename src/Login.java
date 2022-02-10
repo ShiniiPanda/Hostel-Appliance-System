@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
@@ -99,9 +100,10 @@ public class Login {
     private void $$$setupUI$$$() {
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout(0, 0));
+        mainPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(-15000805)), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         titlePanel = new JPanel();
         titlePanel.setLayout(new BorderLayout(0, 0));
-        titlePanel.setBackground(new Color(-1));
+        titlePanel.setBackground(new Color(-4605511));
         titlePanel.setPreferredSize(new Dimension(0, 80));
         mainPanel.add(titlePanel, BorderLayout.NORTH);
         final JLabel label1 = new JLabel();

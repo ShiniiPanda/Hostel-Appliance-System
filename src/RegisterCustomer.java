@@ -18,14 +18,14 @@ public class RegisterCustomer {
     private JPanel panel1;
     private JTextField nameField;
     private JTextField emailField;
-    private JButton addCustomerButton;
-    private JButton viewAllCustomersButton;
+    private JButton submitButton;
     private JRadioButton maleRadioButton;
     private JRadioButton femaleRadioButton;
     private JComboBox roomComboBox;
     private JComboBox yearComboBox;
     private JComboBox monthComboBox;
     private JComboBox dayComboBox;
+    private JButton cancelButton;
     private JFrame frame;
     private ButtonGroup buttonGroup;
 
@@ -35,6 +35,7 @@ public class RegisterCustomer {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setContentPane(panel1);
         frame.setSize(500, 500);
+        frame.setMinimumSize(new Dimension(400, 400));
         frame.setVisible(true);
         buttonGroup = new ButtonGroup();
         buttonGroup.add(maleRadioButton);
@@ -77,13 +78,17 @@ public class RegisterCustomer {
                 }
             }
         });
-        addCustomerButton.addActionListener(e -> {
+        submitButton.addActionListener(e -> {
             if (validateInput() == 0) {
                 JOptionPane.showMessageDialog(null, "Customer has been registered successfully!", "Registration Complete", JOptionPane.PLAIN_MESSAGE);
                 Customer.addNewCustomer(compileNewData());
                 logRegistration(user.getName(), nameField.getText());
                 resetData();
             }
+        });
+        cancelButton.addActionListener(e -> {
+            frame.dispose();
+            new ManagerMenu(user);
         });
     }
 
@@ -174,38 +179,38 @@ public class RegisterCustomer {
         panel3.setBackground(new Color(-1));
         panel1.add(panel3, BorderLayout.CENTER);
         final JLabel label2 = new JLabel();
-        Font label2Font = this.$$$getFont$$$("Arial", Font.PLAIN, 12, label2.getFont());
+        Font label2Font = this.$$$getFont$$$("Arial", Font.PLAIN, 14, label2.getFont());
         if (label2Font != null) label2.setFont(label2Font);
         label2.setForeground(new Color(-16777216));
-        label2.setText("Name");
+        label2.setText("Name:");
         GridBagConstraints gbc;
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.insets = new Insets(5, 0, 10, 10);
+        gbc.anchor = GridBagConstraints.EAST;
+        gbc.insets = new Insets(5, 5, 10, 10);
         panel3.add(label2, gbc);
         final JLabel label3 = new JLabel();
-        Font label3Font = this.$$$getFont$$$("Arial", Font.PLAIN, 12, label3.getFont());
+        Font label3Font = this.$$$getFont$$$("Arial", Font.PLAIN, 14, label3.getFont());
         if (label3Font != null) label3.setFont(label3Font);
         label3.setForeground(new Color(-16777216));
-        label3.setText("Email");
+        label3.setText("Email:");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.insets = new Insets(10, 0, 10, 10);
+        gbc.anchor = GridBagConstraints.EAST;
+        gbc.insets = new Insets(10, 5, 10, 10);
         panel3.add(label3, gbc);
         final JLabel label4 = new JLabel();
-        Font label4Font = this.$$$getFont$$$("Arial", Font.PLAIN, 12, label4.getFont());
+        Font label4Font = this.$$$getFont$$$("Arial", Font.PLAIN, 14, label4.getFont());
         if (label4Font != null) label4.setFont(label4Font);
         label4.setForeground(new Color(-16777216));
-        label4.setText("Gender");
+        label4.setText("Gender:");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 3;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.insets = new Insets(10, 0, 10, 10);
+        gbc.anchor = GridBagConstraints.EAST;
+        gbc.insets = new Insets(10, 5, 10, 10);
         panel3.add(label4, gbc);
         nameField = new JTextField();
         nameField.setPreferredSize(new Dimension(150, 25));
@@ -230,19 +235,20 @@ public class RegisterCustomer {
         gbc.insets = new Insets(10, 10, 10, 0);
         panel3.add(emailField, gbc);
         final JLabel label5 = new JLabel();
-        Font label5Font = this.$$$getFont$$$("Arial", Font.PLAIN, 12, label5.getFont());
+        Font label5Font = this.$$$getFont$$$("Arial", Font.PLAIN, 14, label5.getFont());
         if (label5Font != null) label5.setFont(label5Font);
         label5.setForeground(new Color(-16777216));
-        label5.setText("Room");
+        label5.setText("Room:");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 2;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.insets = new Insets(10, 0, 10, 10);
+        gbc.anchor = GridBagConstraints.EAST;
+        gbc.insets = new Insets(10, 5, 10, 10);
         panel3.add(label5, gbc);
         maleRadioButton = new JRadioButton();
         maleRadioButton.setForeground(new Color(-16777216));
         maleRadioButton.setHideActionText(false);
+        maleRadioButton.setOpaque(false);
         maleRadioButton.setText("Male");
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
@@ -253,6 +259,7 @@ public class RegisterCustomer {
         femaleRadioButton = new JRadioButton();
         femaleRadioButton.setForeground(new Color(-16777216));
         femaleRadioButton.setHideActionText(false);
+        femaleRadioButton.setOpaque(false);
         femaleRadioButton.setText("Female");
         gbc = new GridBagConstraints();
         gbc.gridx = 2;
@@ -261,15 +268,15 @@ public class RegisterCustomer {
         gbc.insets = new Insets(10, 10, 10, 0);
         panel3.add(femaleRadioButton, gbc);
         final JLabel label6 = new JLabel();
-        Font label6Font = this.$$$getFont$$$("Arial", Font.PLAIN, 12, label6.getFont());
+        Font label6Font = this.$$$getFont$$$("Arial", Font.PLAIN, 14, label6.getFont());
         if (label6Font != null) label6.setFont(label6Font);
         label6.setForeground(new Color(-16777216));
-        label6.setText("DOB");
+        label6.setText("Birthdate:");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 4;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.insets = new Insets(10, 0, 5, 0);
+        gbc.anchor = GridBagConstraints.EAST;
+        gbc.insets = new Insets(10, 5, 5, 10);
         panel3.add(label6, gbc);
         roomComboBox = new JComboBox();
         roomComboBox.setMinimumSize(new Dimension(81, 38));
@@ -328,18 +335,19 @@ public class RegisterCustomer {
         gbc.insets = new Insets(10, 10, 5, 10);
         panel3.add(yearComboBox, gbc);
         final JPanel panel4 = new JPanel();
-        panel4.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 5));
+        panel4.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
         panel4.setBackground(new Color(-1));
         panel4.setPreferredSize(new Dimension(0, 90));
         panel1.add(panel4, BorderLayout.SOUTH);
-        viewAllCustomersButton = new JButton();
-        viewAllCustomersButton.setForeground(new Color(-16777216));
-        viewAllCustomersButton.setText("View All Customers");
-        panel4.add(viewAllCustomersButton);
-        addCustomerButton = new JButton();
-        addCustomerButton.setForeground(new Color(-16777216));
-        addCustomerButton.setText("Add Customer");
-        panel4.add(addCustomerButton);
+        submitButton = new JButton();
+        submitButton.setForeground(new Color(-16777216));
+        submitButton.setPreferredSize(new Dimension(200, 30));
+        submitButton.setText("Submit");
+        panel4.add(submitButton);
+        cancelButton = new JButton();
+        cancelButton.setPreferredSize(new Dimension(150, 30));
+        cancelButton.setText("Cancel");
+        panel4.add(cancelButton);
     }
 
     /**

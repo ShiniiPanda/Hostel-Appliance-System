@@ -38,35 +38,35 @@
         <children>
           <component id="47050" class="javax.swing.JLabel">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-              <gridbag top="5" left="0" bottom="10" right="10" weightx="0.0" weighty="0.0"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+              <gridbag top="5" left="5" bottom="10" right="10" weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <font name="Arial" size="12" style="0"/>
+              <font name="Arial" size="14" style="0"/>
               <foreground color="-16777216"/>
-              <text value="Name"/>
+              <text value="Name:"/>
             </properties>
           </component>
           <component id="9310c" class="javax.swing.JLabel">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-              <gridbag top="10" left="0" bottom="10" right="10" weightx="0.0" weighty="0.0"/>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+              <gridbag top="10" left="5" bottom="10" right="10" weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <font name="Arial" size="12" style="0"/>
+              <font name="Arial" size="14" style="0"/>
               <foreground color="-16777216"/>
-              <text value="Email"/>
+              <text value="Email:"/>
             </properties>
           </component>
           <component id="9b5e7" class="javax.swing.JLabel">
             <constraints>
-              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-              <gridbag top="10" left="0" bottom="10" right="10" weightx="0.0" weighty="0.0"/>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+              <gridbag top="10" left="5" bottom="10" right="10" weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <font name="Arial" size="12" style="0"/>
+              <font name="Arial" size="14" style="0"/>
               <foreground color="-16777216"/>
-              <text value="Gender"/>
+              <text value="Gender:"/>
             </properties>
           </component>
           <component id="439d4" class="javax.swing.JTextField" binding="nameField">
@@ -95,13 +95,13 @@
           </component>
           <component id="1446a" class="javax.swing.JLabel">
             <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-              <gridbag top="10" left="0" bottom="10" right="10" weightx="0.0" weighty="0.0"/>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+              <gridbag top="10" left="5" bottom="10" right="10" weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <font name="Arial" size="12" style="0"/>
+              <font name="Arial" size="14" style="0"/>
               <foreground color="-16777216"/>
-              <text value="Room"/>
+              <text value="Room:"/>
             </properties>
           </component>
           <component id="bf192" class="javax.swing.JRadioButton" binding="maleRadioButton" default-binding="true">
@@ -112,6 +112,7 @@
             <properties>
               <foreground color="-16777216"/>
               <hideActionText value="false"/>
+              <opaque value="false"/>
               <text value="Male"/>
             </properties>
           </component>
@@ -123,18 +124,19 @@
             <properties>
               <foreground color="-16777216"/>
               <hideActionText value="false"/>
+              <opaque value="false"/>
               <text value="Female"/>
             </properties>
           </component>
           <component id="6257d" class="javax.swing.JLabel">
             <constraints>
-              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-              <gridbag top="10" left="0" bottom="5" right="0" weightx="0.0" weighty="0.0"/>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+              <gridbag top="10" left="5" bottom="5" right="10" weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <font name="Arial" size="12" style="0"/>
+              <font name="Arial" size="14" style="0"/>
               <foreground color="-16777216"/>
-              <text value="DOB"/>
+              <text value="Birthdate:"/>
             </properties>
           </component>
           <component id="cf17f" class="javax.swing.JComboBox" binding="roomComboBox">
@@ -198,7 +200,7 @@
           </component>
         </children>
       </grid>
-      <grid id="22524" layout-manager="FlowLayout" hgap="15" vgap="5" flow-align="1">
+      <grid id="22524" layout-manager="FlowLayout" hgap="20" vgap="10" flow-align="1">
         <constraints border-constraint="South"/>
         <properties>
           <background color="-1"/>
@@ -206,18 +208,19 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="6150e" class="javax.swing.JButton" binding="viewAllCustomersButton" default-binding="true">
+          <component id="d94d2" class="javax.swing.JButton" binding="submitButton">
             <constraints/>
             <properties>
               <foreground color="-16777216"/>
-              <text value="View All Customers"/>
+              <preferredSize width="200" height="30"/>
+              <text value="Submit"/>
             </properties>
           </component>
-          <component id="d94d2" class="javax.swing.JButton" binding="addCustomerButton" default-binding="true">
+          <component id="7b9fc" class="javax.swing.JButton" binding="cancelButton" default-binding="true">
             <constraints/>
             <properties>
-              <foreground color="-16777216"/>
-              <text value="Add Customer"/>
+              <preferredSize width="150" height="30"/>
+              <text value="Cancel"/>
             </properties>
           </component>
         </children>

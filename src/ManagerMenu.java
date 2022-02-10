@@ -53,7 +53,9 @@ public class ManagerMenu {
             new RegisterCustomer(user);
         });
         ImageIcon registerIcon = new ImageIcon("./Icons/Register.png");
+        ImageIcon deadlineIcon = new ImageIcon("./Icons/deadline.png");
         registerCustomerButton.setIcon(registerIcon);
+        registerAppointmentButton.setIcon(deadlineIcon);
         setCurrentDate();
         registerAppointmentButton.addActionListener(e -> {
             frame.dispose();

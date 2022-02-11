@@ -22,7 +22,6 @@ public class DisplayAppointment {
     private JPanel tableRightGap;
     private JPanel tableLeftGap;
     private JPanel bottomPanel;
-    private JButton printCurrentRowButton;
     private JButton collectPaymentButton;
     private JButton returnToMenuButton;
     private JButton addFeedbackButton;
@@ -142,7 +141,7 @@ public class DisplayAppointment {
     }
 
     private void updateTable(int comboChoice) {
-        Object[][] updatedData = new Object[10][6];
+        Object[][] updatedData = new Object[currentAppointments.size()][6];
         switch (comboChoice) {
             case 0:
                 updatedData = fetchData();

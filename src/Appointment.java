@@ -87,59 +87,6 @@ public class Appointment implements TextStored {
         this.appliance = appliance;
     }
 
-    public static List<Appointment> fetchAllAppointments(){
-        List<Appointment> appointmentList = new ArrayList<>();
-        String line;
-        String [] lineArgs;
-        try {
-            FileReader fileReader = new FileReader("./TextFiles/Appointments.txt");
-            BufferedReader file = new BufferedReader(fileReader);
-            while ((line = file.readLine()) != null) {
-                lineArgs = line.strip().split("//");
-                appointmentList.add(new Appointment(
-                        lineArgs[0],
-                        Customer.fetchById(lineArgs[1]),
-                        new Technician(User.fetchUserById(lineArgs[2])),
-                        lineArgs[3],
-                        lineArgs[4],
-                        lineArgs[5],
-                        HomeAppliance.fetchById(lineArgs[6])
-                ));
-            }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-        return appointmentList;
-    }
-
-    //Overloaded type of fetchAppointments to handle Appointment Status
-    public static List<Appointment> fetchAllAppointments(String status){
-        List<Appointment> appointmentList = new ArrayList<>();
-        String line;
-        String [] lineArgs;
-        try {
-            FileReader fileReader = new FileReader("./TextFiles/Appointments.txt");
-            BufferedReader file = new BufferedReader(fileReader);
-            while ((line = file.readLine()) != null) {
-                lineArgs = line.strip().split("//");
-                if (lineArgs[3].equals(status.toUpperCase())){
-                    appointmentList.add(new Appointment(
-                            lineArgs[0],
-                            Customer.fetchById(lineArgs[1]),
-                            new Technician(User.fetchUserById(lineArgs[2])),
-                            lineArgs[3],
-                            lineArgs[4],
-                            lineArgs[5],
-                            HomeAppliance.fetchById(lineArgs[6])
-                    ));
-                }
-            }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-        return appointmentList;
-    }
-
     public static List<Appointment> fetchIndividualAppointments(Technician technician){
         List<Appointment> appointmentList = new ArrayList<>();
         String line;

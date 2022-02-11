@@ -33,7 +33,7 @@ public class TechnicianMenu {
         frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 400);
-        frame.setMinimumSize(new Dimension(500, 300));
+        frame.setMinimumSize(new Dimension(500, 400));
         frame.setVisible(true);
         setCurrentDate();
     }

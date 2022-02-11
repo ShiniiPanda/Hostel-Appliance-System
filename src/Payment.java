@@ -89,14 +89,21 @@ public class Payment {
         appointmentComboBox.setEnabled(false);
         displayPaymentData();
         payButton.addActionListener(e -> {
-            chosenAppointment.setStatus("COMPLETE");
-            Appointment.updateAppointment(chosenAppointment);
-            if (JOptionPane.showConfirmDialog(null, "Payment Successful, Would you like to add feedback?",
-                    "Payment Successful!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                new FeedbackForm(user, chosenAppointment);
+            if (JOptionPane.showConfirmDialog(null, "Would you like to proceed with payment?",
+                    "Payment Confirmation", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                chosenAppointment.setStatus("COMPLETE");
+                Appointment.updateAppointment(chosenAppointment);
+                if (JOptionPane.showConfirmDialog(null, "Payment Successful, Would you like to add feedback?",
+                        "Payment Successful!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    new FeedbackForm(user, chosenAppointment);
+                }
+                Transaction.addNewTransaction(compileTransactionData());
+                frame.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Payment operation has been cancelled",
+                        "Payment Failure", JOptionPane.ERROR_MESSAGE);
+                frame.dispose();
             }
-            Transaction.addNewTransaction(compileTransactionData());
-            frame.dispose();
         });
         cancelButton.addActionListener(e -> {
             frame.dispose();

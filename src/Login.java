@@ -32,23 +32,22 @@ public class Login {
             String user = nameInput.getText(),
                     pass = passInput.getText();
             LoginResponse res = User.validateLogin(user, pass);
-            if (res.user.getRole().equals("Denied")) {
-                res.result = 3;
-            }
             switch (res.result) {
                 case 0:
-                    JOptionPane.showMessageDialog(null, "Successfully Logged In", "Login Success", JOptionPane.PLAIN_MESSAGE);
-                    frame.dispose();
-                    relayUser(res.user);
+                    if (res.user.getRole().equals("Denied")) {
+                        JOptionPane.showMessageDialog(null, "This account has been denied from accessing the system.",
+                                "Login Failed", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Successfully Logged In", "Login Success", JOptionPane.PLAIN_MESSAGE);
+                        frame.dispose();
+                        relayUser(res.user);
+                    }
                     break;
                 case 1:
                     JOptionPane.showMessageDialog(null, "Unable to login, invalid ID.", "Login Failed", JOptionPane.ERROR_MESSAGE);
                     break;
                 case 2:
                     JOptionPane.showMessageDialog(null, "Unable to login, Password Incorrect.", "Login Failed", JOptionPane.ERROR_MESSAGE);
-                    break;
-                case 3:
-                    JOptionPane.showMessageDialog(null, "This account has been denied from accessing the system.", "Login Failed", JOptionPane.ERROR_MESSAGE);
                     break;
             }
             logAttempt(res);

@@ -32,8 +32,8 @@ public class ManagerMenu {
         $$$setupUI$$$();
         frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 400);
-        frame.setMinimumSize(new Dimension(500, 300));
+        frame.setSize(600, 400);
+        frame.setMinimumSize(new Dimension(600, 300));
         frame.setVisible(true);
         setCurrentDate();
     }
@@ -45,7 +45,7 @@ public class ManagerMenu {
         frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 400);
-        frame.setMinimumSize(new Dimension(500, 300));
+        frame.setMinimumSize(new Dimension(500, 400));
         frame.setVisible(true);
         this.setLoggedUser(user);
         registerCustomerButton.addActionListener(e -> {
@@ -54,12 +54,18 @@ public class ManagerMenu {
         });
         ImageIcon registerIcon = new ImageIcon("./Icons/Register.png");
         ImageIcon deadlineIcon = new ImageIcon("./Icons/deadline.png");
+        ImageIcon manageUsersIcon = new ImageIcon("./Icons/ManageUsers.png");
         registerCustomerButton.setIcon(registerIcon);
         registerAppointmentButton.setIcon(deadlineIcon);
+        manageUsersButton.setIcon(manageUsersIcon);
         setCurrentDate();
         registerAppointmentButton.addActionListener(e -> {
             frame.dispose();
             new RegisterAppointment(user);
+        });
+        manageUsersButton.addActionListener(e -> {
+            frame.dispose();
+            new DisplayUsers(user);
         });
     }
 
@@ -230,6 +236,7 @@ public class ManagerMenu {
         menuChoices.setBackground(new Color(-1));
         mainPanel.add(menuChoices, BorderLayout.CENTER);
         registerCustomerButton = new JButton();
+        registerCustomerButton.setFocusable(false);
         registerCustomerButton.setHorizontalTextPosition(0);
         registerCustomerButton.setPreferredSize(new Dimension(150, 100));
         registerCustomerButton.setText("Register Customer");
@@ -238,29 +245,31 @@ public class ManagerMenu {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(0, 0, 0, 15);
+        gbc.insets = new Insets(0, 5, 0, 10);
         menuChoices.add(registerCustomerButton, gbc);
         manageUsersButton = new JButton();
+        manageUsersButton.setFocusable(false);
         manageUsersButton.setHorizontalTextPosition(0);
-        manageUsersButton.setPreferredSize(new Dimension(101, 100));
+        manageUsersButton.setPreferredSize(new Dimension(150, 100));
         manageUsersButton.setText("Manage Users");
         manageUsersButton.setVerticalTextPosition(3);
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(0, 15, 0, 15);
+        gbc.insets = new Insets(0, 10, 0, 10);
         menuChoices.add(manageUsersButton, gbc);
         registerAppointmentButton = new JButton();
+        registerAppointmentButton.setFocusable(false);
         registerAppointmentButton.setHorizontalTextPosition(0);
-        registerAppointmentButton.setPreferredSize(new Dimension(160, 100));
+        registerAppointmentButton.setPreferredSize(new Dimension(150, 100));
         registerAppointmentButton.setText("Register Appointment");
         registerAppointmentButton.setVerticalTextPosition(3);
         gbc = new GridBagConstraints();
         gbc.gridx = 2;
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(0, 15, 0, 0);
+        gbc.insets = new Insets(0, 10, 0, 5);
         menuChoices.add(registerAppointmentButton, gbc);
     }
 

@@ -64,9 +64,16 @@ public class DisplayUsers {
             }
             int rowNumber = table.getSelectedRow();
             User rowUser = currentUsers.get(rowNumber);
-            rowUser.setRole("Delete");
-            User.updateUser(rowUser);
-            updateTable(statusComboBox.getSelectedIndex());
+            if (rowUser.getId().equals(user.getId())) {
+                JOptionPane.showMessageDialog(null, "You cannot delete this session's user, please use a different manager account!", "Failure!", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this user?",
+                    "Delete Confirmation", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                rowUser.setRole("Delete");
+                User.updateUser(rowUser);
+                updateTable(statusComboBox.getSelectedIndex());
+            }
         });
         addUserButton.addActionListener(e -> {
             new RegisterUser(user);

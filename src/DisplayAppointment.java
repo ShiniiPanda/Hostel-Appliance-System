@@ -25,6 +25,7 @@ public class DisplayAppointment {
     private JButton collectPaymentButton;
     private JButton returnToMenuButton;
     private JButton addFeedbackButton;
+    private JButton cancelAppointmentButton;
     private Technician currentUser;
     private List<Appointment> currentAppointments;
 
@@ -75,6 +76,30 @@ public class DisplayAppointment {
             } else {
                 JOptionPane.showMessageDialog(null, "Selected appointment must be complete before collecting feedback!",
                         "Failure!", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+        cancelAppointmentButton.addActionListener( e-> {
+            if (table.getSelectedRowCount() > 1) {
+                JOptionPane.showMessageDialog(null, "You can only cancel a single appointment at a time!", "Failure!", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (table.getSelectedRowCount() == 0) {
+                JOptionPane.showMessageDialog(null, "Please select an appointment from the list!", "Failure!", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            int rowNumber = table.getSelectedRow();
+            Appointment rowAppointment = currentAppointments.get(rowNumber);
+            if (rowAppointment.getStatus().equals("COMPLETE")) {
+                JOptionPane.showMessageDialog(null, "You cannot cancel a completed appointment!", "Failure!", JOptionPane.ERROR_MESSAGE);
+            } else if (rowAppointment.getStatus().equals("CANCELLED")) {
+                JOptionPane.showMessageDialog(null, "This appointment is already cancelled!", "Failure!", JOptionPane.ERROR_MESSAGE);
+            } else {
+                if (JOptionPane.showConfirmDialog(null, "Are you sure you want to cancel this appointment?",
+                        "Cancellation Confirmation", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    rowAppointment.setStatus("CANCELLED");
+                    Appointment.updateAppointment(rowAppointment);
+                    updateTable(statusComboBox.getSelectedIndex());
+                }
             }
         });
         returnToMenuButton.addActionListener(e -> {

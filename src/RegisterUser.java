@@ -120,6 +120,10 @@ public class RegisterUser {
             JOptionPane.showMessageDialog(null, "Please input an email address!", "Registration Failure", JOptionPane.ERROR_MESSAGE);
             return 1;
         }
+        if (User.isIDTaken(usernameField.getText())) {
+            JOptionPane.showMessageDialog(null, "This ID already exists, please choose a different one!", "Registration Failure", JOptionPane.ERROR_MESSAGE);
+            return 1;
+        }
         if (!emailField.getText().contains("@")) {
             JOptionPane.showMessageDialog(null, "Please input a valid email address!", "Registration Failure", JOptionPane.ERROR_MESSAGE);
             return 1;

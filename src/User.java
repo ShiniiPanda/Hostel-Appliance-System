@@ -128,6 +128,26 @@ public class User extends Person implements TextStored {
         return userList;
     }
 
+    public static boolean isIDTaken(String id){
+        String line;
+        String lineID;
+        try {
+            FileReader fileReader = new FileReader("./TextFiles/Employees.txt");
+            BufferedReader file = new BufferedReader(fileReader);
+            while ((line = file.readLine()) != null) {
+                lineID = line.substring(0, line.indexOf("//"));
+                if (lineID.equals(id)) {
+                    return true;
+                }
+            }
+            file.close();
+            fileReader.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
     public static void addNewUser(User u) {
         String record = u.toTextFormat() + "\n";
         try {

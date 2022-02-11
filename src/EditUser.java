@@ -206,7 +206,7 @@ public class EditUser {
         try {
             FileWriter fileWriter = new FileWriter("./TextFiles/AuditLogs.txt", true);
             BufferedWriter file = new BufferedWriter(fileWriter);
-            file.write(logDate + "System User account: " + chosenUser.getId() + " edited By Manager: " + managerName + "\n");
+            file.write(logDate + "System User account (" + chosenUser.getId() + ") edited By Manager (" + managerName + ")\n");
             file.close();
             fileWriter.close();
         } catch (IOException e) {

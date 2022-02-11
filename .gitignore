@@ -2,3 +2,7 @@ out/
 .idea/
 OODJ.iml
 TextFiles/AuditLogs.txt
+/src/DisplayAppointments.java
+/src/DisplayCustomers.java
+/src/DisplayTransactions.java
+/src/LoginForm.java

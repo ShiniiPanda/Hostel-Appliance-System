@@ -15,6 +15,9 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class EditUser {
+
+    //This form allows Managers to edit end-user information.
+
     private JPanel panel1;
     private JTextField nameField;
     private JTextField emailField;
@@ -35,6 +38,7 @@ public class EditUser {
         chosenUser = systemUser;
         frame = new JFrame();
         $$$setupUI$$$();
+        frame.setTitle(Constants.PAGE_TITLE);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setContentPane(panel1);
         frame.setSize(500, 500);
@@ -101,6 +105,8 @@ public class EditUser {
                         "Cancel Confirmation", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     frame.dispose();
                 }
+            } else {
+                frame.dispose();
             }
         });
     }
@@ -126,6 +132,7 @@ public class EditUser {
         dayComboBox.setSelectedItem(dateArgs[2]);
     }
 
+    //Gather information for UI Contents and return a User Object
     private User compileNewData() {
         String DOB = yearComboBox.getSelectedItem() + "/" + monthComboBox.getSelectedItem() + "/" + dayComboBox.getSelectedItem();
         return new User(usernameField.getText(),
@@ -161,37 +168,38 @@ public class EditUser {
         return 0;
     }
 
+    //Calculate the changes and decrement the total possible changes for each variable
     private int calculateChanges() {
         changesMessage = "";
         String DOB = chosenUser.getDOB();
         String[] dateArgs = DOB.split("/");
         if (!passwordField.getText().equals(chosenUser.getPassword())) {
             changes--;
-            changesMessage += "\nPassowrd: " + chosenUser.getPassword() + " --> " + passwordField.getText();
+            changesMessage += "\nPassword: " + chosenUser.getPassword() + "  -->  " + passwordField.getText();
         }
         if (!nameField.getText().equals(chosenUser.getName())) {
             changes--;
-            changesMessage += "\nName: " + chosenUser.getName() + " --> " + nameField.getText();
+            changesMessage += "\nName: " + chosenUser.getName() + "  -->  " + nameField.getText();
         }
         if (!emailField.getText().equals(chosenUser.getEmail())) {
             changes--;
-            changesMessage += "\nEmail: " + chosenUser.getEmail() + " --> " + emailField.getText();
+            changesMessage += "\nEmail: " + chosenUser.getEmail() + "  -->  " + emailField.getText();
         }
         if (!accessComboBox.getSelectedItem().equals(chosenUser.getRole())) {
             changes--;
-            changesMessage += "\nAccess Level: " + chosenUser.getRole() + " --> " + accessComboBox.getSelectedItem();
+            changesMessage += "\nAccess Level: " + chosenUser.getRole() + "  -->  " + accessComboBox.getSelectedItem();
         }
         if (!yearComboBox.getSelectedItem().equals(dateArgs[0])) {
             changes--;
-            changesMessage += "\nYear: " + dateArgs[0] + " --> " + yearComboBox.getSelectedItem();
+            changesMessage += "\nYear: " + dateArgs[0] + "  -->  " + yearComboBox.getSelectedItem();
         }
         if (!monthComboBox.getSelectedItem().equals(dateArgs[1])) {
             changes--;
-            changesMessage += "\nMonth: " + dateArgs[1] + " --> " + monthComboBox.getSelectedItem();
+            changesMessage += "\nMonth: " + dateArgs[1] + "  -->  " + monthComboBox.getSelectedItem();
         }
         if (!dayComboBox.getSelectedItem().equals(dateArgs[2])) {
             changes--;
-            changesMessage += "\nDay: " + dateArgs[2] + " --> " + dayComboBox.getSelectedItem();
+            changesMessage += "\nDay: " + dateArgs[2] + "  -->  " + dayComboBox.getSelectedItem();
         }
         if (changes == 7) {
             return 1;
@@ -199,8 +207,9 @@ public class EditUser {
         return 0;
     }
 
+    //AuditLogs.txt entry
     private void logEdit(String managerName) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
         LocalDateTime date = LocalDateTime.now();
         String logDate = "[" + formatter.format(date) + "] ";
         try {
@@ -214,6 +223,7 @@ public class EditUser {
         }
     }
 
+    //Empty UI Fields to accommodate for new entry
     private void resetData() {
         usernameField.setText("");
         passwordField.setText("");

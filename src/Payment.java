@@ -32,11 +32,13 @@ public class Payment {
     private Appointment chosenAppointment;
     private List<Appointment> appointmentList;
 
+    //Accessed through the technician menu
     public Payment(Technician user) {
-        appointmentList = Appointment.fetchIndividualAppointments(user, "PENDING");
+        appointmentList = user.fetchIndividualAppointments("PENDING");
         JFrame frame = new JFrame();
         $$$setupUI$$$();
         frame.setContentPane(panel1);
+        frame.setTitle(Constants.PAGE_TITLE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 500);
         frame.setMinimumSize(new Dimension(400, 400));
@@ -74,6 +76,7 @@ public class Payment {
         });
     }
 
+    //Accessed though appointment list
     public Payment(Technician user, Appointment appointment) {
         chosenAppointment = appointment;
         JFrame frame = new JFrame();
@@ -84,7 +87,6 @@ public class Payment {
         frame.setMinimumSize(new Dimension(400, 400));
         frame.setVisible(true);
         String appointmentDisplay = chosenAppointment.getCustomer().getName() + " - " + chosenAppointment.getId();
-        System.out.println(appointmentDisplay);
         comboBoxModel.setSelectedItem(appointmentDisplay);
         appointmentComboBox.setEnabled(false);
         displayPaymentData();
@@ -151,6 +153,7 @@ public class Payment {
         totalField.setText(total + "");
     }
 
+    //Returns a Transaction Object
     private Transaction compileTransactionData() {
         int uniqueId = Transaction.fetchTransactionCount() + 10001;
         return new Transaction(Integer.toString(uniqueId),

@@ -2,3 +2,8 @@
 551//Oven//12
 552//Electric Kettle//5
 553//Electric Heater//20
+554//Mini Fridge//55
+555//Electric Blender//20
+556//Toaster//10
+557//Alarm Clock//5
+558//Electric Iron//25

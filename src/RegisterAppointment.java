@@ -5,7 +5,11 @@ import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
@@ -39,6 +43,7 @@ public class RegisterAppointment {
         applianceList = HomeAppliance.fetchAllAppliance();
         technicianList = Technician.fetchAllTechnicians();
         JFrame frame = new JFrame();
+        frame.setTitle(Constants.PAGE_TITLE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setContentPane(panel1);
         frame.setSize(500, 500);
@@ -49,8 +54,10 @@ public class RegisterAppointment {
         populateTechnicianComboBox();
         submitButton.addActionListener(e -> {
             if (validateInput() == 0) {
-                Appointment.addNewAppointment(compileAppointmentData());
+                Appointment newAppointment = compileAppointmentData();
+                Appointment.addNewAppointment(newAppointment);
                 JOptionPane.showMessageDialog(null, "Appointment has been registered successfully!", "Success!", JOptionPane.PLAIN_MESSAGE);
+                logAppointment(user.getName(), newAppointment);
                 resetData();
             }
         });
@@ -66,16 +73,16 @@ public class RegisterAppointment {
                     String monthValue = (String) month;
                     Object year = yearComboBox.getSelectedItem();
                     int yearValue = (int) year;
-                    if (monthValue.equals("02")) {
-                        if (yearValue % 4 == 0) {
+                    if (monthValue.equals("02")) { // Special case for February (different number of days)
+                        if (yearValue % 4 == 0) { // Leap Year
                             dayComboBox.setModel(new DefaultComboBoxModel(Constants.days29));
-                        } else {
+                        } else { // Normal Year
                             dayComboBox.setModel(new DefaultComboBoxModel(Constants.days28));
                         }
-                    } else if (Arrays.stream(Constants.months31).anyMatch(monthValue::equals)) {
+                    } else if (Arrays.stream(Constants.months31).anyMatch(monthValue::equals)) { // If month has 31 days
                         dayComboBox.setModel(new DefaultComboBoxModel(Constants.days31));
                     } else {
-                        dayComboBox.setModel(new DefaultComboBoxModel(Constants.days30));
+                        dayComboBox.setModel(new DefaultComboBoxModel(Constants.days30)); // Normal 30 days months
                     }
                 }
             }
@@ -88,7 +95,7 @@ public class RegisterAppointment {
                     Object month = monthComboBox.getSelectedItem();
                     String monthValue = (String) month;
                     if (yearValue % 4 == 0) {
-                        if (monthValue.equals("02")) {
+                        if (monthValue.equals("02")) { // Leap Year Validation
                             dayComboBox.setModel(new DefaultComboBoxModel(Constants.days29));
                         }
                     }
@@ -118,6 +125,7 @@ public class RegisterAppointment {
         }
     }
 
+    //Empty fields to prepare for new entry
     private void resetData() {
         customerComboBox.setSelectedIndex(0);
         applianceComboBox.setSelectedIndex(0);
@@ -163,8 +171,9 @@ public class RegisterAppointment {
         return 0;
     }
 
+    //Gather Appointment info from UI Components and compile into a Appointment Object
     private Appointment compileAppointmentData() {
-        int uniqueId = Appointment.fetchAppointmentCount() + 1221;
+        int uniqueId = Appointment.fetchAppointmentCount() + 1501;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         String startDate = yearComboBox.getSelectedItem() + "/" + monthComboBox.getSelectedItem() + "/" + dayComboBox.getSelectedItem();
         LocalDate endDate = currentDate.plusDays(Integer.parseInt(durationField.getText()));
@@ -175,6 +184,23 @@ public class RegisterAppointment {
                 startDate,
                 formatter.format(endDate),
                 applianceList.get(applianceComboBox.getSelectedIndex() - 1));
+    }
+
+    //AuditLogs.txt entry
+    private void logAppointment(String managerName, Appointment appointment) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        LocalDateTime date = LocalDateTime.now();
+        String logDate = "[" + formatter.format(date) + "] ";
+        try {
+            FileWriter fileWriter = new FileWriter(Constants.LOG_FILE, true);
+            BufferedWriter file = new BufferedWriter(fileWriter);
+            file.write(logDate + "New Appointment (" + appointment.getId() + ") for Customer (" +
+                    appointment.getCustomer().getName() + ") registered by Manager (" + managerName + ")\n");
+            file.close();
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**

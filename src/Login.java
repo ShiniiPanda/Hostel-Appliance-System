@@ -25,7 +25,9 @@ public class Login {
         JFrame frame = new JFrame();
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setTitle(Constants.PAGE_TITLE);
         frame.setSize(400, 400);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.getRootPane().setDefaultButton(loginButton);
         loginButton.addActionListener(e -> {
@@ -33,7 +35,7 @@ public class Login {
                     pass = passInput.getText();
             LoginResponse res = User.validateLogin(user, pass);
             switch (res.result) {
-                case 0:
+                case 0: // USED FOUND
                     if (res.user.getRole().equals("Denied")) {
                         JOptionPane.showMessageDialog(null, "This account has been denied from accessing the system.",
                                 "Login Failed", JOptionPane.ERROR_MESSAGE);
@@ -43,10 +45,10 @@ public class Login {
                         relayUser(res.user);
                     }
                     break;
-                case 1:
+                case 1: // ID NOT FOUND
                     JOptionPane.showMessageDialog(null, "Unable to login, invalid ID.", "Login Failed", JOptionPane.ERROR_MESSAGE);
                     break;
-                case 2:
+                case 2: // PASSWORD INCORRECT
                     JOptionPane.showMessageDialog(null, "Unable to login, Password Incorrect.", "Login Failed", JOptionPane.ERROR_MESSAGE);
                     break;
             }
@@ -54,8 +56,9 @@ public class Login {
         });
     }
 
+    //AuditLogs.txt entry
     private static void logAttempt(LoginResponse res) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
         LocalDateTime date = LocalDateTime.now();
         String logDate = "[" + formatter.format(date) + "] ";
         try {
@@ -79,6 +82,7 @@ public class Login {
         }
     }
 
+    //Switches the validated user to their respective menu depending on user role
     private static void relayUser(User user) {
         String role = user.getRole();
         if (role.equals("Technician")) {

@@ -36,11 +36,13 @@ public class FeedbackForm {
     private Appointment chosenAppointment;
     private List<Appointment> appointmentList;
 
+    //Accessed through technician menu
     public FeedbackForm(Technician user) {
-        appointmentList = Appointment.fetchIndividualAppointments(user, "COMPLETE");
+        appointmentList = user.fetchIndividualAppointments("COMPLETE");
         JFrame frame = new JFrame();
         $$$setupUI$$$();
         initializeRadioButtons();
+        frame.setTitle(Constants.PAGE_TITLE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setContentPane(panel1);
         frame.setSize(500, 500);
@@ -72,6 +74,7 @@ public class FeedbackForm {
         });
     }
 
+    //Accessed through appointment list
     public FeedbackForm(Technician user, Appointment appointment) {
         chosenAppointment = appointment;
         JFrame frame = new JFrame();
@@ -127,13 +130,14 @@ public class FeedbackForm {
         rating5.setSelected(true);
     }
 
+    //Gathers information from UI Components and returns a Feedback Object
     private Feedback compileFeedbackData() {
         int rating = rating1.isSelected() ? 1 :
                 (rating2.isSelected() ? 2 :
                         (rating3.isSelected() ? 3 :
                                 (rating4.isSelected() ? 4 : 5)));
         String reviewContent = reviewTextArea.getText().equals("") ? "No Message" :
-                reviewTextArea.getText().replaceAll("[\\t\\n\\r]+", " ");
+                reviewTextArea.getText().replaceAll("[\\t\\n\\r]+", " "); // Regex to replace new lines and tabs with space
         DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDateTime date = LocalDateTime.now();
         return new Feedback(chosenAppointment.getCustomer(),

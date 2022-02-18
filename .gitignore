@@ -1,6 +1,6 @@
 out/
 .idea/
-OODJ.iml
+OODJ Assignment.iml
 TextFiles/AuditLogs.txt
 /src/DisplayAppointments.java
 /src/DisplayCustomers.java

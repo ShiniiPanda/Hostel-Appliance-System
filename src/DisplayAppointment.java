@@ -34,6 +34,7 @@ public class DisplayAppointment {
         JFrame frame = new JFrame();
         $$$setupUI$$$();
         frame.setContentPane(panel1);
+        frame.setTitle(Constants.PAGE_TITLE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setSize(700, 400);
@@ -78,7 +79,7 @@ public class DisplayAppointment {
                         "Failure!", JOptionPane.ERROR_MESSAGE);
             }
         });
-        cancelAppointmentButton.addActionListener( e-> {
+        cancelAppointmentButton.addActionListener(e -> {
             if (table.getSelectedRowCount() > 1) {
                 JOptionPane.showMessageDialog(null, "You can only cancel a single appointment at a time!", "Failure!", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -128,8 +129,9 @@ public class DisplayAppointment {
 
     }
 
+    //Method to cast appointment into an array of objects for to be added to the table model
     private Object[][] fetchData() {
-        List<Appointment> appointmentList = Appointment.fetchIndividualAppointments(currentUser);
+        List<Appointment> appointmentList = currentUser.fetchIndividualAppointments();
         currentAppointments = appointmentList;
         Object[][] data = new Object[appointmentList.size()][6];
         for (int i = 0; i < appointmentList.size(); i++) {
@@ -142,8 +144,9 @@ public class DisplayAppointment {
         return data;
     }
 
+    //Overloaded version of above method to fetch specific appointments based on status
     private Object[][] fetchData(String status) {
-        List<Appointment> appointmentList = Appointment.fetchIndividualAppointments(currentUser, status);
+        List<Appointment> appointmentList = currentUser.fetchIndividualAppointments(status);
         currentAppointments = appointmentList;
         Object[][] data = new Object[appointmentList.size()][6];
         for (int i = 0; i < appointmentList.size(); i++) {
@@ -156,6 +159,7 @@ public class DisplayAppointment {
         return data;
     }
 
+    // Centering the table columns, except for the first one
     private void centerTableCells() {
         DefaultTableCellRenderer centerCells = new DefaultTableCellRenderer();
         centerCells.setHorizontalAlignment(SwingConstants.CENTER);
@@ -168,16 +172,16 @@ public class DisplayAppointment {
     private void updateTable(int comboChoice) {
         Object[][] updatedData = new Object[currentAppointments.size()][6];
         switch (comboChoice) {
-            case 0:
+            case 0: // ALL APPOINTMENTS
                 updatedData = fetchData();
                 break;
-            case 1:
+            case 1: // PENDING APPOINTMENTS
                 updatedData = fetchData("PENDING");
                 break;
-            case 2:
+            case 2: // COMPLETED APPOINTMENTS
                 updatedData = fetchData("COMPLETE");
                 break;
-            case 3:
+            case 3: // CANCELLED APPOINTMENTS
                 updatedData = fetchData("CANCELLED");
                 break;
         }
@@ -240,15 +244,19 @@ public class DisplayAppointment {
         bottomPanel.setPreferredSize(new Dimension(0, 130));
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
         collectPaymentButton = new JButton();
-        collectPaymentButton.setPreferredSize(new Dimension(500, 30));
+        collectPaymentButton.setPreferredSize(new Dimension(300, 30));
         collectPaymentButton.setText("Collect Payment");
         bottomPanel.add(collectPaymentButton);
         addFeedbackButton = new JButton();
-        addFeedbackButton.setPreferredSize(new Dimension(500, 30));
+        addFeedbackButton.setPreferredSize(new Dimension(300, 30));
         addFeedbackButton.setText("Add Feedback");
         bottomPanel.add(addFeedbackButton);
+        cancelAppointmentButton = new JButton();
+        cancelAppointmentButton.setPreferredSize(new Dimension(300, 30));
+        cancelAppointmentButton.setText("Cancel Appointment");
+        bottomPanel.add(cancelAppointmentButton);
         returnToMenuButton = new JButton();
-        returnToMenuButton.setPreferredSize(new Dimension(300, 30));
+        returnToMenuButton.setPreferredSize(new Dimension(150, 30));
         returnToMenuButton.setText("Return To Menu");
         bottomPanel.add(returnToMenuButton);
         tabelPanel = new JPanel();

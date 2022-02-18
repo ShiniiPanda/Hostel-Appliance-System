@@ -4,10 +4,13 @@ import java.util.List;
 
 public class Transaction implements TextStored {
 
+    //Text File Storage Format: ID//APPOINTMENT-ID//AMOUNT
+
     private String invoiceID;
     private Appointment appointment;
     private float amount;
 
+    //Default Constructor
     public Transaction() {
         this.invoiceID = "000";
         this.appointment = new Appointment();
@@ -44,12 +47,13 @@ public class Transaction implements TextStored {
         this.amount = amount;
     }
 
+    //Method returns a list of all transactions.
     public static List<Transaction> fetchAllTransactions(){
         List<Transaction> transactionList = new ArrayList<>();
         String line;
         String [] lineArgs;
         try {
-            FileReader fileReader = new FileReader("./TextFiles/Transactions.txt");
+            FileReader fileReader = new FileReader(Constants.TRANSACTION_FILE);
             BufferedReader file = new BufferedReader(fileReader);
             while ((line = file.readLine()) != null) {
                 lineArgs = line.strip().split("//");
@@ -65,10 +69,11 @@ public class Transaction implements TextStored {
         return transactionList;
     }
 
+    //Fetches the number of transaction records
     public static int fetchTransactionCount(){
         int count = 0;
         try {
-            FileReader fileReader = new FileReader("./TextFiles/Transactions.txt");
+            FileReader fileReader = new FileReader(Constants.TRANSACTION_FILE);
             BufferedReader file = new BufferedReader(fileReader);
             while (file.readLine() != null) count++;
             file.close();
@@ -79,10 +84,11 @@ public class Transaction implements TextStored {
         return count;
     }
 
+    //Appends a new record to Transaction.txt
     public static void addNewTransaction(Transaction t){
         String record = t.toTextFormat() + "\n";
         try {
-            FileWriter fileWriter = new FileWriter("./TextFiles/Transactions.txt", true);
+            FileWriter fileWriter = new FileWriter(Constants.TRANSACTION_FILE, true);
             BufferedWriter writer = new BufferedWriter(fileWriter);
             writer.write(record);
             writer.close();

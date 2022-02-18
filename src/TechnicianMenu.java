@@ -25,15 +25,20 @@ public class TechnicianMenu {
     private JLabel userEmail;
     private JLabel userDOB;
     private JLabel currentDate;
+    private JMenuBar menuBar;
+    private JMenu userMenu;
+    private JMenuItem logoutItem;
+    private JMenuItem exitItem;
 
     // Default menu with no user set (not currently used)
     public TechnicianMenu() {
         JFrame frame = new JFrame();
         $$$setupUI$$$();
         frame.setContentPane(panel1);
+        frame.setTitle(Constants.PAGE_TITLE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 400);
-        frame.setMinimumSize(new Dimension(500, 400));
+        frame.setSize(600, 500);
+        frame.setMinimumSize(new Dimension(550, 400));
         frame.setVisible(true);
         setCurrentDate();
     }
@@ -44,9 +49,10 @@ public class TechnicianMenu {
         $$$setupUI$$$();
         frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 400);
-        frame.setMinimumSize(new Dimension(500, 300));
+        frame.setSize(600, 500);
+        frame.setMinimumSize(new Dimension(550, 400));
         frame.setVisible(true);
+        frame.setJMenuBar(menuBar);
         this.setLoggedUser(user);
         ImageIcon appointmentsIcon = new ImageIcon("./Icons/Appointments.png"),
                 paymentsIcon = new ImageIcon(("./Icons/Payments.png")),
@@ -66,6 +72,13 @@ public class TechnicianMenu {
         feedbackButton.addActionListener(e -> {
             frame.dispose();
             new FeedbackForm(user);
+        });
+        logoutItem.addActionListener(e -> {
+            frame.dispose();
+            new Login();
+        });
+        exitItem.addActionListener(e -> {
+            System.exit(0);
         });
     }
 
@@ -99,6 +112,14 @@ public class TechnicianMenu {
         profilePic.setVisible(true);
         Border profilePicBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
         profilePic.setBorder(profilePicBorder);
+
+        menuBar = new JMenuBar();
+        userMenu = new JMenu("User");
+        logoutItem = new JMenuItem("Logout");
+        exitItem = new JMenuItem("Exit");
+        userMenu.add(logoutItem);
+        userMenu.add(exitItem);
+        menuBar.add(userMenu);
     }
 
     /**

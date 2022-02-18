@@ -1,3 +1,6 @@
-admin//adminPass//Admin Account//Manager//email@gmail.com//2001/06/06
-technician1//adminPass//Admin Account//Technician//email@gmail.com//2001/06/06
-admin2//adminPass//Admin Account//Manager//email@gmail.com//2001/06/06
+manager0//adminPass123//Kareem Nabil//Manager//email@gmail.com//2001/06/06
+technician0//adminPass123//Jerry Charles//Technician//email@gmail.com//2001/06/06
+manager1//managerPass321//Khalid Hamoodi//Manager//khalid@yahoo.com//1974/04/19
+technician1//techPass321//Mohammed Amir//Technician//mohamir@gmail.com//2001/06/02
+manager5//testPassword332211//Ahmed Saeed//Denied//ahmed@gmail.com//1965/11/06
+technician6//superSecret321//Hadeer Hesham//Denied//hadeer@gmail.com//1999/11/30

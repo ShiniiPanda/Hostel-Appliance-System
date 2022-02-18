@@ -32,6 +32,7 @@ public class RegisterCustomer {
     public RegisterCustomer(Manager user) {
         frame = new JFrame();
         $$$setupUI$$$();
+        frame.setTitle(Constants.PAGE_TITLE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setContentPane(panel1);
         frame.setSize(500, 500);
@@ -92,7 +93,7 @@ public class RegisterCustomer {
         });
     }
 
-
+    //Gather data from UI Componenets into a Customer Object
     private Customer compileNewData() {
         int unqiueID = Customer.fetchCustomerCount() + 1001;
         String DOB = yearComboBox.getSelectedItem() + "/" + monthComboBox.getSelectedItem() + "/" + dayComboBox.getSelectedItem();
@@ -126,12 +127,13 @@ public class RegisterCustomer {
         return 0;
     }
 
+    //AuditLogs.txt entry
     private void logRegistration(String managerName, String name) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
         LocalDateTime date = LocalDateTime.now();
         String logDate = "[" + formatter.format(date) + "] ";
         try {
-            FileWriter fileWriter = new FileWriter("./TextFiles/AuditLogs.txt", true);
+            FileWriter fileWriter = new FileWriter(Constants.LOG_FILE, true);
             BufferedWriter file = new BufferedWriter(fileWriter);
             file.write(logDate + name + " Successfully Registered By Manager " + managerName + "\n");
             file.close();
@@ -141,6 +143,7 @@ public class RegisterCustomer {
         }
     }
 
+    //Empty fields to prepare for new entry
     private void resetData() {
         nameField.setText("");
         emailField.setText("");

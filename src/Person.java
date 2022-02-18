@@ -1,7 +1,10 @@
 abstract public class Person {
+//This class serves as the basis for all other humanoid classes.
+//Includes basic information as well as default getters/setters.
 
     protected String id, name, role, email, DOB;
 
+    //Absolute Default Constructor
     public Person(){
         this.name = "null";
         this.id = "null";
@@ -9,6 +12,7 @@ abstract public class Person {
         this.email = "null";
         this.DOB = "00/00/0000";
     }
+
     public Person(String id, String name, String role, String email, String DOB){
         this.id = id;
         this.name = name;

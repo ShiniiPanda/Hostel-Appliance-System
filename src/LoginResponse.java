@@ -1,4 +1,5 @@
 public class LoginResponse {
+
     public int result;
     public User user;
 

@@ -5,12 +5,15 @@ import java.io.IOException;
 
 public class Feedback implements TextStored {
 
+    // Text File Storage Format: CUSTOMER-ID//APPLIANCE-ID//APPOINTMENT-ID//DATE//RATING//CONTENT
+
     private Customer customer;
     private Appointment appointment;
     private String content, date;
     private int rating;
     private HomeAppliance appliance;
 
+    //Default Constructor
     public Feedback(){
         this.customer = new Customer();
         this.appliance = new HomeAppliance();
@@ -20,7 +23,6 @@ public class Feedback implements TextStored {
         this.content = "No Message";
     }
 
-    //This is a constructor for the feedback class
     public Feedback(Customer customer, HomeAppliance appliance, Appointment appointment, String date, int rating, String content ) {
         this.customer = customer;
         this.appliance = appliance;
@@ -78,10 +80,11 @@ public class Feedback implements TextStored {
         this.appliance = appliance;
     }
 
+    //Appends a new Feedback record to text file
     public static void addNewFeedback(Feedback f){
         String record = f.toTextFormat() + "\n";
         try {
-            FileWriter fileWriter = new FileWriter("./TextFiles/Feedback.txt", true);
+            FileWriter fileWriter = new FileWriter(Constants.FEEDBACK_FILE, true);
             BufferedWriter writer = new BufferedWriter(fileWriter);
             writer.write(record);
             writer.close();

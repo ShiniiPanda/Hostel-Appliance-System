@@ -32,6 +32,7 @@ public class DisplayUsers {
         JFrame frame = new JFrame();
         $$$setupUI$$$();
         frame.setContentPane(panel1);
+        frame.setTitle(Constants.PAGE_TITLE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setSize(700, 400);
@@ -104,6 +105,7 @@ public class DisplayUsers {
 
     }
 
+    //Cast user data into an Object array to be added to the table model
     private Object[][] fetchData() {
         List<User> userList = User.fetchAllUsers();
         currentUsers = userList;
@@ -117,6 +119,7 @@ public class DisplayUsers {
         return data;
     }
 
+    //Overloaded version of above method, to specify a certain user-role for display
     private Object[][] fetchData(String role) {
         List<User> userList = User.fetchAllUsers(role);
         currentUsers = userList;
@@ -142,16 +145,16 @@ public class DisplayUsers {
     private void updateTable(int comboChoice) {
         Object[][] updatedData = new Object[currentUsers.size()][5];
         switch (comboChoice) {
-            case 0:
+            case 0: // ALL USERS
                 updatedData = fetchData();
                 break;
-            case 1:
+            case 1: // MANAGERS ONLY
                 updatedData = fetchData("Manager");
                 break;
-            case 2:
+            case 2: // TECHNICIANS ONLY
                 updatedData = fetchData("Technician");
                 break;
-            case 3:
+            case 3: // DENIED ONLY
                 updatedData = fetchData("Denied");
                 break;
         }

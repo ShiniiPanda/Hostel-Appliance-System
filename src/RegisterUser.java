@@ -31,6 +31,7 @@ public class RegisterUser {
     public RegisterUser(Manager user) {
         frame = new JFrame();
         $$$setupUI$$$();
+        frame.setTitle(Constants.PAGE_TITLE);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setContentPane(panel1);
         frame.setSize(500, 500);
@@ -88,6 +89,7 @@ public class RegisterUser {
     }
 
 
+    //Gather all the information from the UI Components to create a User object
     private User compileNewData() {
         String DOB = yearComboBox.getSelectedItem() + "/" + monthComboBox.getSelectedItem() + "/" + dayComboBox.getSelectedItem();
         return new User(usernameField.getText(),
@@ -120,7 +122,7 @@ public class RegisterUser {
             JOptionPane.showMessageDialog(null, "Please input an email address!", "Registration Failure", JOptionPane.ERROR_MESSAGE);
             return 1;
         }
-        if (User.isIDTaken(usernameField.getText())) {
+        if (User.isIdTaken(usernameField.getText())) {
             JOptionPane.showMessageDialog(null, "This ID already exists, please choose a different one!", "Registration Failure", JOptionPane.ERROR_MESSAGE);
             return 1;
         }
@@ -131,12 +133,13 @@ public class RegisterUser {
         return 0;
     }
 
+    //AuditLogs.txt entry
     private void logRegistration(String managerName, String name) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
         LocalDateTime date = LocalDateTime.now();
         String logDate = "[" + formatter.format(date) + "] ";
         try {
-            FileWriter fileWriter = new FileWriter("./TextFiles/AuditLogs.txt", true);
+            FileWriter fileWriter = new FileWriter(Constants.LOG_FILE, true);
             BufferedWriter file = new BufferedWriter(fileWriter);
             file.write(logDate + "New " + (String) accessComboBox.getSelectedItem() + name + " Successfully Registered By Manager: " + managerName + "\n");
             file.close();
@@ -146,6 +149,7 @@ public class RegisterUser {
         }
     }
 
+    //Empty the fields to prepare for new entry
     private void resetData() {
         usernameField.setText("");
         passwordField.setText("");

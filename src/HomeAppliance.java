@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,9 +6,12 @@ import java.util.List;
 
 public class HomeAppliance {
 
+    // Text File Storage Format : ID//NAME//PRICE-PER-DAY
+
     private String id, name;
     private float pricePerDay;
 
+    //Default Constructor
     public HomeAppliance(){
         this.id = "000";
         this.name = "null";
@@ -46,15 +48,16 @@ public class HomeAppliance {
         this.pricePerDay = pricePerDay;
     }
 
+    //Fetches an appliance using its unique identification number
     public static HomeAppliance fetchById(String id){
         String line;
         String [] lineArgs;
         try {
-            FileReader fileReader = new FileReader("./TextFiles/Appliances.txt");
+            FileReader fileReader = new FileReader(Constants.APPLIANCE_FILE);
             BufferedReader file = new BufferedReader(fileReader);
             while ((line = file.readLine()) != null) {
                 lineArgs = line.strip().split("//");
-                if (lineArgs[0].equals(id)) {
+                if (lineArgs[0].equals(id)) { // ID CHECK
                     return new HomeAppliance(
                             lineArgs[0],
                             lineArgs[1],
@@ -70,12 +73,13 @@ public class HomeAppliance {
         return new HomeAppliance();
     }
 
+    //Fetches a list of all appliances found in HomeAppliance.txt
     public static List<HomeAppliance> fetchAllAppliance(){
         List<HomeAppliance> applianceList = new ArrayList<>();
         String line;
         String [] lineArgs;
         try {
-            FileReader fileReader = new FileReader("./TextFiles/Appliances.txt");
+            FileReader fileReader = new FileReader(Constants.APPLIANCE_FILE);
             BufferedReader file = new BufferedReader(fileReader);
             while ((line = file.readLine()) != null) {
                 lineArgs = line.strip().split("//");

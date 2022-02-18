@@ -11,6 +11,7 @@ public class Appointment implements TextStored {
 
     // Text File Storage Format: ID//CustomerID//Technician//Status//StartDate//EndDate//ApplianceID
 
+    // Default constructor
     public Appointment(){
         this.id = "000";
         this.customer = new Customer();
@@ -87,72 +88,16 @@ public class Appointment implements TextStored {
         this.appliance = appliance;
     }
 
-    public static List<Appointment> fetchIndividualAppointments(Technician technician){
-        List<Appointment> appointmentList = new ArrayList<>();
-        String line;
-        String [] lineArgs;
-        try {
-            FileReader fileReader = new FileReader("./TextFiles/Appointments.txt");
-            BufferedReader file = new BufferedReader(fileReader);
-            while ((line = file.readLine()) != null) {
-                lineArgs = line.strip().split("//");
-                if (lineArgs[2].equals(technician.getId())) {
-                    appointmentList.add(new Appointment(
-                            lineArgs[0],
-                            Customer.fetchById(lineArgs[1]),
-                            new Technician(User.fetchUserById(lineArgs[2])),
-                            lineArgs[3],
-                            lineArgs[4],
-                            lineArgs[5],
-                            HomeAppliance.fetchById(lineArgs[6])
-                    ));
-                }
-            }
-            file.close();
-            fileReader.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-        return appointmentList;
-    }
-
-    public static List<Appointment> fetchIndividualAppointments(Technician technician, String status){
-        List<Appointment> appointmentList = new ArrayList<>();
-        String line;
-        String [] lineArgs;
-        try {
-            FileReader fileReader = new FileReader("./TextFiles/Appointments.txt");
-            BufferedReader file = new BufferedReader(fileReader);
-            while ((line = file.readLine()) != null) {
-                lineArgs = line.strip().split("//");
-                if ((lineArgs[2].equals(technician.getId())) &&
-                        (lineArgs[3].equals(status.toUpperCase()))){
-                    appointmentList.add(new Appointment(
-                            lineArgs[0],
-                            Customer.fetchById(lineArgs[1]),
-                            new Technician(User.fetchUserById(lineArgs[2])),
-                            lineArgs[3],
-                            lineArgs[4],
-                            lineArgs[5],
-                            HomeAppliance.fetchById(lineArgs[6])
-                    ));
-                }
-            }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-        return appointmentList;
-    }
-
+    //Fetch a specific appointment by its Identification number (unique to each row)
     public static Appointment fetchById(String id)  {
         try {
-            FileReader fileReader = new FileReader("./TextFiles/Appointments.txt");
+            FileReader fileReader = new FileReader(Constants.APPOINTMENT_FILE);
             BufferedReader file = new BufferedReader(fileReader);
             String line;
             String [] lineArgs;
             while ((line = file.readLine()) != null){
                 lineArgs = line.strip().split("//");
-                if (lineArgs[0].equals(id)){
+                if (lineArgs[0].equals(id)){ // ID Check
                     return new Appointment(
                             lineArgs[0],
                             Customer.fetchById(lineArgs[1]),
@@ -171,10 +116,11 @@ public class Appointment implements TextStored {
         return new Appointment();
     }
 
+    //Fetches the total number of records in the text file, useful for ID generation.
     public static int fetchAppointmentCount(){
         int count = 0;
         try {
-            FileReader fileReader = new FileReader("./TextFiles/Appointments.txt");
+            FileReader fileReader = new FileReader(Constants.APPOINTMENT_FILE);
             BufferedReader file = new BufferedReader(fileReader);
             while (file.readLine() != null) count++;
             file.close();
@@ -185,10 +131,11 @@ public class Appointment implements TextStored {
         return count;
     }
 
+    //Simple method to append a new record to Appointments.txt
     public static void addNewAppointment(Appointment a){
         String record = a.toTextFormat() + "\n";
         try {
-            FileWriter fileWriter = new FileWriter("./TextFiles/Appointments.txt", true);
+            FileWriter fileWriter = new FileWriter(Constants.APPOINTMENT_FILE, true);
             BufferedWriter writer = new BufferedWriter(fileWriter);
             writer.write(record);
             writer.close();
@@ -198,18 +145,19 @@ public class Appointment implements TextStored {
         }
     }
 
+    //Updates an existing record based on passed Appointment object, matches ID.
     public static void updateAppointment(Appointment appointment){
         int recordNumber = -1, lineNumber = 0;
-        List<String> fileRows = new ArrayList<String>();
+        List<String> fileRows = new ArrayList<>();
         String row;
         String id;
         try {
-            FileReader fileReader = new FileReader("./TextFiles/Appointments.txt");
+            FileReader fileReader = new FileReader(Constants.APPOINTMENT_FILE);
             BufferedReader read = new BufferedReader(fileReader);
             while ((row = read.readLine()) != null) {
                 fileRows.add(row);
                 id = row.substring(0, 4);
-                if (id.equals(appointment.getId())){
+                if (id.equals(appointment.getId())){ // ID Match
                     recordNumber = lineNumber;
                 }
                 lineNumber++;
@@ -227,9 +175,10 @@ public class Appointment implements TextStored {
         }
     }
 
+    //Rewrites Appointments.txt with a new records, usually used as a helper method in other functions.
     private static void rewriteFile(List<String> rows) {
         try {
-            FileWriter fileWriter = new FileWriter("./TextFiles/Appointments.txt");
+            FileWriter fileWriter = new FileWriter(Constants.APPOINTMENT_FILE);
             BufferedWriter writer = new BufferedWriter(fileWriter);
             for (String line : rows) {
                 writer.write(line);
@@ -244,8 +193,10 @@ public class Appointment implements TextStored {
 
     @Override
     public String toTextFormat(){
-        return this.id + "//" + this.customer.getId() + "//" + this.technician.getId() + "//" + this.status + "//" +
-                this.startDate + "//" + this.endDate + "//" + this.appliance.getId();
+        return this.id + "//" + this.customer.getId() + "//" +
+                this.technician.getId() + "//" + this.status + "//" +
+                this.startDate + "//" + this.endDate + "//" +
+                this.appliance.getId();
     }
 
 }

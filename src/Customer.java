@@ -4,11 +4,12 @@ import java.util.List;
 
 public class Customer extends Person implements TextStored {
 
-    // Customer Text File Format : ID//NAME//ROLE//EMAIL//DOB//ROOM
+    // Text File Storage Format: ID//NAME//ROLE//GENDER//EMAIL//DOB//ROOM-NUMBER
 
     private int roomNumber;
     private String gender;
 
+    //Default Constructor
     public Customer() {
         super();
         this.roomNumber = 0;
@@ -40,7 +41,7 @@ public class Customer extends Person implements TextStored {
     // This method returns a Customer object when given an ID.
     public static Customer fetchById(String id)  {
         try {
-            FileReader fileReader = new FileReader("./TextFiles/Customers.txt");
+            FileReader fileReader = new FileReader(Constants.CUSTOMER_FILE);
             BufferedReader file = new BufferedReader(fileReader);
             String line;
             String [] lineArgs;
@@ -68,7 +69,7 @@ public class Customer extends Person implements TextStored {
     public static List<Customer> fetchAllCustomers(){
         List<Customer> customerList = new ArrayList<Customer>();
         try {
-            FileReader fileReader = new FileReader("./TextFiles/Customers.txt");
+            FileReader fileReader = new FileReader(Constants.CUSTOMER_FILE);
             BufferedReader file = new BufferedReader(fileReader);
             String line;
             String[] lineArgs;
@@ -90,10 +91,11 @@ public class Customer extends Person implements TextStored {
         return customerList;
     }
 
+    //Fetches the total number of records inside Customers.txt
     public static int fetchCustomerCount(){
         int count = 0;
         try {
-            FileReader fileReader = new FileReader("./TextFiles/Customers.txt");
+            FileReader fileReader = new FileReader(Constants.CUSTOMER_FILE);
             BufferedReader file = new BufferedReader(fileReader);
             while (file.readLine() != null) count++;
             file.close();
@@ -104,10 +106,11 @@ public class Customer extends Person implements TextStored {
         return count;
     }
 
+    //Appends a new Customer record to text file
     public static void addNewCustomer(Customer c) {
         String record = c.toTextFormat() + "\n";
         try {
-            FileWriter fileWriter = new FileWriter("./TextFiles/Customers.txt", true);
+            FileWriter fileWriter = new FileWriter(Constants.CUSTOMER_FILE, true);
             BufferedWriter file = new BufferedWriter(fileWriter);
             file.write(record);
             file.close();
@@ -115,19 +118,6 @@ public class Customer extends Person implements TextStored {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", role='" + role + '\'' +
-                ", email='" + email + '\'' +
-                ", DOB='" + DOB + '\'' +
-                ", Gender='" + gender + '\'' +
-                ", roomNumber=" + roomNumber +
-                '}';
     }
 
     @Override

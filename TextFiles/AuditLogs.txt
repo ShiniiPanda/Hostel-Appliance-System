@@ -12,3 +12,5 @@
 [2022/02/18 13:52] New Appointment (1513) for Customer (Luca Madrigalo) registered by Manager (Kareem Nabil)
 [2022/02/18 14:05] Successful Login Attempt by Kareem Nabil
 [2022/02/18 14:06] Successful Login Attempt by Jerry Charles
+[2022/03/02 08:42] Successful Login Attempt by Kareem Nabil
+[2022/03/02 08:44] Sameer Hani Successfully Registered By Manager Kareem Nabil
